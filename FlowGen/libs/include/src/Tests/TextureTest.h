@@ -1,11 +1,11 @@
 #ifndef _Texture_Test_H_
 #define _Texture_Test_H_
 
-#include <src/Render.h>
+#include <src/Renderer.h>
+#include <src/Texture.h>
 #include <src/Shader/shader_s.h>
 #include <src/stb_image.h>
 #include <iostream>
-
 
 
 inline int TextureTest()
@@ -53,11 +53,11 @@ inline int TextureTest()
 
     float vertices[] = {
         // positions          // colors           // texture coords
-        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-        0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-       -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-       -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
-   };
+        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+        -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f // top left 
+    };
 
     unsigned int indices[] = {
         0, 1, 3,
@@ -78,17 +78,18 @@ inline int TextureTest()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*) (3 * sizeof(float)));
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*) (6 * sizeof(float)));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
 
+
     // load and create a texture 
     // -------------------------
     unsigned int texture1, texture2;
-    
+
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1);
 
@@ -97,12 +98,12 @@ inline int TextureTest()
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
+
     // load image, create texture and generate mipmaps
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
 
-    unsigned char *data = stbi_load("Textures/Mona_Lisa.jpg", &width, &height, &nrChannels, 0);
+    unsigned char* data = stbi_load("Textures/Mona_Lisa.jpg", &width, &height, &nrChannels, 0);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -114,6 +115,7 @@ inline int TextureTest()
     }
     stbi_image_free(data);
 
+
     glGenTextures(1, &texture2);
     glBindTexture(GL_TEXTURE_2D, texture2);
 
@@ -122,7 +124,7 @@ inline int TextureTest()
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
+
     stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
 
     data = stbi_load("Textures/Girl_with_a_Pearl_Earring.jpg", &width, &height, &nrChannels, 0);
@@ -138,10 +140,14 @@ inline int TextureTest()
     stbi_image_free(data);
 
     ourShader.use(); // don't forget to activate/use the shader before setting uniforms!
-    // either set it manually like so:
+    //either set it manually like so:
     glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
-    // or set it via the texture class
+    //or set it via the texture class
     ourShader.setInt("texture2", 1);
+
+
+    // Texture* t0 = new Texture("Textures/Mona_Lisa.jpg");
+    // Texture* t1 = new Texture("Textures/Girl_with_a_Pearl_Earring.jpg");
 
     // render loop
     // -----------
@@ -156,11 +162,18 @@ inline int TextureTest()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // bind textures on corresponding texture units
+        // textures on corresponding texture units
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
+
+        // glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), t0->TextureObject);
+        // glUniform1i(glGetUniformLocation(ourShader.ID, "texture2"), t1->TextureObject);
+        // glActiveTexture(GL_TEXTURE0);
+        // glBindTexture(GL_TEXTURE_2D, t0->TextureObject);
+        // glActiveTexture(GL_TEXTURE1);
+        // glBindTexture(GL_TEXTURE_2D, t1->TextureObject);
 
         // render container
         ourShader.use();

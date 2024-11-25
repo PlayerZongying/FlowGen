@@ -1,7 +1,7 @@
 #ifndef _Shader_Test_H_
 #define _Shader_Test_H_
 
-#include <src/Render.h>
+#include <src/Renderer.h>
 #include <src/Shader/shader_s.h>
 #include <iostream>
 

@@ -3,5 +3,9 @@
 
 #include <src/Tests/ShaderTest.h>
 #include <src/Tests/TextureTest.h>
+#include <src/Tests/TransformationTest.h>
+#include <src/Tests/CoordinateSystemTest.h>
+#include <src/Tests/CameraTest.h>
+#include <src/Tests/ImguiTest.h>
 
 #endif

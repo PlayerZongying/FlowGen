@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\Tests\\TextureTest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|solutionrelative:FlowGen\\libs\\include\\src\\Tests\\TextureTest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\Tests\\Tests.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|solutionrelative:FlowGen\\libs\\include\\src\\Tests\\Tests.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\stb_image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|solutionrelative:FlowGen\\libs\\include\\src\\stb_image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\stb_image.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|solutionrelative:FlowGen\\libs\\include\\src\\stb_image.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\FlowGen.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{3128F69E-7C5F-4E18-A31E-4B4A75C55783}|FlowGen\\FlowGen.vcxproj|solutionrelative:FlowGen\\FlowGen.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\fragmentShader.glsl||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowGen\\fragmentShader.glsl||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\fragmentShaderOld.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowGen\\fragmentShaderOld.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\vertexShader.glsl||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowGen\\vertexShader.glsl||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\shader_s.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowGen\\libs\\include\\src\\shader_s.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,69 +43,69 @@
           ]
         },
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 309,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "shader_s.h",
-              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\shader_s.h",
-              "RelativeDocumentMoniker": "FlowGen\\libs\\include\\src\\shader_s.h",
-              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\shader_s.h",
-              "RelativeToolTip": "FlowGen\\libs\\include\\src\\shader_s.h",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-31T12:19:11.471Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "fragmentShader.glsl",
-              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\fragmentShader.glsl",
-              "RelativeDocumentMoniker": "FlowGen\\fragmentShader.glsl",
-              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\fragmentShader.glsl",
-              "RelativeToolTip": "FlowGen\\fragmentShader.glsl",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-10-31T12:16:28.404Z"
+              "DocumentIndex": 3,
+              "Title": "stb_image.cpp",
+              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\stb_image.cpp",
+              "RelativeDocumentMoniker": "FlowGen\\libs\\include\\src\\stb_image.cpp",
+              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\stb_image.cpp",
+              "RelativeToolTip": "FlowGen\\libs\\include\\src\\stb_image.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-25T13:26:42.747Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "fragmentShaderOld.glsl",
-              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\fragmentShaderOld.glsl",
-              "RelativeDocumentMoniker": "FlowGen\\fragmentShaderOld.glsl",
-              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\fragmentShaderOld.glsl",
-              "RelativeToolTip": "FlowGen\\fragmentShaderOld.glsl",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-10-31T12:12:20.661Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "vertexShader.glsl",
-              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\vertexShader.glsl",
-              "RelativeDocumentMoniker": "FlowGen\\vertexShader.glsl",
-              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\vertexShader.glsl",
-              "RelativeToolTip": "FlowGen\\vertexShader.glsl",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-10-31T12:15:27.632Z"
+              "Title": "stb_image.h",
+              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\stb_image.h",
+              "RelativeDocumentMoniker": "FlowGen\\libs\\include\\src\\stb_image.h",
+              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\stb_image.h",
+              "RelativeToolTip": "FlowGen\\libs\\include\\src\\stb_image.h",
+              "ViewState": "AQIAADwQAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-25T13:26:15.228Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "TextureTest.h",
+              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\Tests\\TextureTest.h",
+              "RelativeDocumentMoniker": "FlowGen\\libs\\include\\src\\Tests\\TextureTest.h",
+              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\Tests\\TextureTest.h",
+              "RelativeToolTip": "FlowGen\\libs\\include\\src\\Tests\\TextureTest.h",
+              "ViewState": "AQIAAHcAAAAAAAAAAAAAAHwAAABGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-25T13:26:05.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Tests.h",
+              "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\Tests\\Tests.h",
+              "RelativeDocumentMoniker": "FlowGen\\libs\\include\\src\\Tests\\Tests.h",
+              "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\libs\\include\\src\\Tests\\Tests.h",
+              "RelativeToolTip": "FlowGen\\libs\\include\\src\\Tests\\Tests.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-11-25T13:26:04.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "FlowGen.cpp",
               "DocumentMoniker": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\FlowGen.cpp",
               "RelativeDocumentMoniker": "FlowGen\\FlowGen.cpp",
               "ToolTip": "D:\\GithubRepository\\Graphics\\OpenGL\\FlowGen\\FlowGen\\FlowGen.cpp",
               "RelativeToolTip": "FlowGen\\FlowGen.cpp",
-              "ViewState": "AQIAAAMBAAAAAAAAAAAcwBQBAAAqAAAA",
+              "ViewState": "AQIAACAAAAAAAAAAAAAAAMAAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-29T10:29:08.701Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T10:29:08.701Z"
             }
           ]
         }

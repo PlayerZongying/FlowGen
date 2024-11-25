@@ -190,16 +190,21 @@
 // }
 
 
+#include <imgui/imgui.h>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <src/Shader/shader_s.h>
 #include <src/Tests/Tests.h>
-#include <src/Render.h>
+#include <src/Renderer.h>
 #include <iostream>
 
 int main()
 {
 
     // DrawTriangleWithShader();
-    TextureTest();
+    // TextureTest();
+    // CoordinateSystemTest();
+    // CameraTest();
+    ImguiTest();
 }
