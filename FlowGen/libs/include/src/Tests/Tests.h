@@ -7,5 +7,6 @@
 #include <src/Tests/CoordinateSystemTest.h>
 #include <src/Tests/CameraTest.h>
 #include <src/Tests/ImguiTest.h>
+#include <src/Tests/ObjLoaderTest.h>
 
 #endif

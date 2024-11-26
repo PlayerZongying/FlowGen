@@ -136,8 +136,11 @@
     <ClInclude Include="libs\include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="libs\include\src\Camera.h" />
+    <ClInclude Include="libs\include\src\Mesh.h" />
+    <ClInclude Include="libs\include\src\ObjLoader.h" />
     <ClInclude Include="libs\include\src\Tests\CameraTest.h" />
     <ClInclude Include="libs\include\src\Tests\CoordinateSystemTest.h" />
+    <ClInclude Include="libs\include\src\Tests\ObjLoaderTest.h" />
     <ClInclude Include="libs\include\src\Tests\TextureTest.h">
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -219,6 +222,8 @@
     <ClCompile Include="libs\include\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="libs\include\imgui\imgui_tables.cpp" />
     <ClCompile Include="libs\include\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="libs\include\src\Mesh.cpp" />
+    <ClCompile Include="libs\include\src\ObjLoader.cpp" />
     <ClCompile Include="libs\include\src\stb_image.cpp" />
     <ClCompile Include="libs\include\src\Texture.cpp" />
     <ClCompile Include="libs\src\glad.c" />
@@ -238,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\include\src\Tests\ImguiTest.h" />
+    <Content Include="Models\Flag.obj" />
     <Content Include="Shader\CoordinateSystemTestFS.glsl" />
     <Content Include="Shader\CoordinateSystemTestVS.glsl" />
     <Content Include="Shader\fragmentShader.glsl" />
@@ -248,6 +254,9 @@
     <Content Include="Shader\vertexShader.glsl" />
     <Content Include="Textures\Girl_with_a_Pearl_Earring.jpg" />
     <Content Include="Textures\Mona_Lisa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="libs\include\src\FlowGL\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

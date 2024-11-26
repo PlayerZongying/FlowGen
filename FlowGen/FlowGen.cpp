@@ -206,5 +206,7 @@ int main()
     // TextureTest();
     // CoordinateSystemTest();
     // CameraTest();
-    ImguiTest();
+    // ImguiTest();
+    // ObjLoaderTest();
+    ObjLoaderTest2();
 }
