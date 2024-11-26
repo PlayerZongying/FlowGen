@@ -13,11 +13,11 @@
 
 #include <src/Renderer.h>
 #include <src/Shader/shader_s.h>
-#include <src/ObjLoader.h>
+#include <src/FlowGL/ObjLoader.h>
 #include <iostream>
 #include <vector>
 
-#include "src/Mesh.h"
+#include <src/FlowGL/Mesh.h>
 
 inline int ObjLoaderTest()
 {
@@ -94,7 +94,7 @@ inline int ObjLoaderTest()
 
 
 
-    Mesh* flagMesh = Obj::LoadObjMesh("Models/Flag.obj");
+    Mesh* flagMesh = Flow::LoadObjMesh("Models/Flag.obj");
     
 
 
@@ -331,7 +331,7 @@ inline int ObjLoaderTest2()
     std::vector<Mesh*> FlagMeshes;
     for (unsigned int i = 0; i < 10; i++)
     {
-        Mesh* FlagMesh = Obj::LoadObjMesh("Models/Flag.obj");
+        Mesh* FlagMesh = Flow::LoadObjMesh("Models/Flag.obj");
         FlagMeshes.push_back(FlagMesh);
     }
 

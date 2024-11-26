@@ -2,9 +2,9 @@
 #define _Texture_Test_H_
 
 #include <src/Renderer.h>
-#include <src/Texture.h>
+#include <src/FlowGL/Texture.h>
 #include <src/Shader/shader_s.h>
-#include <src/stb_image.h>
+#include <src/FlowGL/stb_image.h>
 #include <iostream>
 
 

@@ -3,7 +3,7 @@
 
 #include <src/Renderer.h>
 #include <src/Shader/shader_s.h>
-#include <src/stb_image.h>
+#include <src/FlowGL/stb_image.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
