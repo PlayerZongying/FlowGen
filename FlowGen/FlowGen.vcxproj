@@ -131,7 +131,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FlowGen.cpp" />
+    <ClCompile Include="libs\include\src\Flow\ETime.cpp" />
+    <ClCompile Include="libs\include\src\Flow\FlowGen.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClInclude Include="libs\include\imgui\imgui.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h" />
@@ -143,6 +145,10 @@
     <ClInclude Include="libs\include\src\FlowGL\stb_image.h" />
     <ClInclude Include="libs\include\src\FlowGL\Texture.h" />
     <ClInclude Include="libs\include\src\FlowGL\Triangle.h" />
+    <ClInclude Include="libs\include\src\Flow\ETime.h" />
+    <ClInclude Include="libs\include\src\Flow\FlowGen.h" />
+    <ClInclude Include="libs\include\src\Flow\FlyingCamera.h" />
+    <ClInclude Include="libs\include\src\Flow\Input.h" />
     <ClInclude Include="libs\include\src\Tests\CameraTest.h" />
     <ClInclude Include="libs\include\src\Tests\CoordinateSystemTest.h" />
     <ClInclude Include="libs\include\src\Tests\ObjLoaderTest.h" />
@@ -234,6 +240,8 @@
     <ClCompile Include="libs\include\src\FlowGL\stb_image.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Texture.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Triangle.cpp" />
+    <ClCompile Include="libs\include\src\Flow\FlyingCamera.cpp" />
+    <ClCompile Include="libs\include\src\Flow\Input.cpp" />
     <ClCompile Include="libs\src\glad.c" />
     <ClInclude Include="libs\include\src\Tests\TransformationTest.h" />
   </ItemGroup>

@@ -1,8 +1,9 @@
-## Ignore Visual Studio related folders
+## Ignore Visual Studio / Rider related folders
 .vs/
 .idea/
 
-
+# Ignore all Debug folders at any directory level
+**/Debug/
 
 
 # Build results
