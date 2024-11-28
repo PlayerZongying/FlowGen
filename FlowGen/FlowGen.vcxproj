@@ -131,20 +131,101 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\include\src\FlowGL\Camera.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\FlowGen.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\FlowGen.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\GithubRepository\Graphics\OpenGL\FlowGen\FlowGen\libs\include;</AdditionalIncludeDirectories>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\FlowGraphics.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Shader.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\VirtualObject.cpp" />
     <ClCompile Include="libs\include\src\Flow\ETime.cpp" />
     <ClCompile Include="libs\include\src\Flow\FlowGen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="libs\include\imgui\imgui.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="libs\include\src\Camera.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Camera.h" />
     <ClInclude Include="libs\include\src\FlowGL\Cube.h" />
+    <ClInclude Include="libs\include\src\FlowGL\FlowGraphics.h" />
     <ClInclude Include="libs\include\src\FlowGL\Mesh.h" />
     <ClInclude Include="libs\include\src\FlowGL\ObjLoader.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Shader.h" />
     <ClInclude Include="libs\include\src\FlowGL\Square.h" />
     <ClInclude Include="libs\include\src\FlowGL\stb_image.h" />
     <ClInclude Include="libs\include\src\FlowGL\Texture.h" />
     <ClInclude Include="libs\include\src\FlowGL\Triangle.h" />
+    <ClInclude Include="libs\include\src\FlowGL\VirtualObject.h" />
     <ClInclude Include="libs\include\src\Flow\ETime.h" />
     <ClInclude Include="libs\include\src\Flow\FlowGen.h" />
     <ClInclude Include="libs\include\src\Flow\FlyingCamera.h" />
@@ -250,8 +331,6 @@
     <ClInclude Include="libs\include\GLFW\glfw3.h" />
     <ClInclude Include="libs\include\GLFW\glfw3native.h" />
     <ClInclude Include="libs\include\KHR\khrplatform.h" />
-    <ClInclude Include="libs\include\src\Renderer.h" />
-    <ClInclude Include="libs\include\src\Shader\shader_s.h" />
     <ClInclude Include="libs\include\src\Tests\ShaderTest.h" />
     <ClInclude Include="libs\include\src\Tests\Tests.h" />
   </ItemGroup>

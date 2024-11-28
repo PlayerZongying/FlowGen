@@ -1,7 +1,15 @@
 ﻿#pragma once
-
-class ETime
+namespace Engine
 {
-public:
-    
-};
+    class ETime
+    {
+    public:
+
+        void UpdateDeltaTime(const float& aDeltaTime);
+        const float& DeltaTime();
+
+    private:
+
+        float myDeltaTime;
+    };
+}
