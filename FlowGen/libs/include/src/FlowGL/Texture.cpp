@@ -18,8 +18,8 @@ Texture::Texture(const char* aPath)
     
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     if (data)
     {
@@ -40,7 +40,6 @@ Texture::Texture(const char* aPath)
     {
         std::cout << "Failed to load texture" << std::endl;
     }
-
-    glBindTexture(GL_TEXTURE, 0);
+    
     stbi_image_free(data);
 }

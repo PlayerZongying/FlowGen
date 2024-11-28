@@ -1,7 +1,7 @@
 #pragma once
-
-class Cube
+#include "Mesh.h"
+class Cube : public Mesh
 {
 public:
-    
+    Cube();
 };

@@ -1,5 +1,1 @@
-﻿  vertexShader.glsl
-  fragmentShader.glsl
-  正在生成代码...
-D:\GithubRepository\Graphics\OpenGL\FlowGen\FlowGen\vertexShader.glsl(1,1): error C1021: 无效的预处理器命令“version”
-D:\GithubRepository\Graphics\OpenGL\FlowGen\FlowGen\fragmentShader.glsl(1,1): error C1021: 无效的预处理器命令“version”
+﻿  FlowGen.vcxproj -> D:\GithubRepository\Graphics\OpenGL\FlowGen\x64\Debug\FlowGen.exe

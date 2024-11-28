@@ -1,7 +1,9 @@
 #pragma once
 
-class Triangle
+#pragma once
+#include "Mesh.h"
+class Triangle : public Mesh
 {
 public:
-    
+    Triangle();
 };

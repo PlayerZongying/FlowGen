@@ -1,0 +1,25 @@
+## Ignore Visual Studio related folders
+.vs/
+.idea/
+
+
+
+
+# Build results
+[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.ilk
+*.log
+*.lib
+*.ncb
+*.sdf
+*.ipch
+*.db
+*.opendb
+*.VC.db
+*.ipch
+*.vsidx

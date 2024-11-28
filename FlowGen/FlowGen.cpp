@@ -205,8 +205,8 @@ int main()
     // DrawTriangleWithShader();
     // TextureTest();
     // CoordinateSystemTest();
-    // CameraTest();
+    CameraTest2();
     // ImguiTest();
     // ObjLoaderTest();
-    ObjLoaderTest2();
+    // ObjLoaderTest2();
 }

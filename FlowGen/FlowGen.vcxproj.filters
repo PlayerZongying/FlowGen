@@ -21,10 +21,43 @@
     <ClCompile Include="libs\src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="vertexShader.glsl">
+    <ClCompile Include="libs\include\imgui\imgui.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="fragmentShader.glsl">
+    <ClCompile Include="libs\include\imgui\imgui_draw.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\imgui\imgui_impl_glfw.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\imgui\imgui_impl_opengl3.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\imgui\imgui_tables.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\imgui\imgui_widgets.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\Cube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\ObjLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\Square.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\stb_image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\FlowGL\Triangle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,16 +74,68 @@
     <ClInclude Include="libs\include\KHR\khrplatform.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="libs\include\src\shader_s.h">
+    <ClInclude Include="libs\include\imgui\imgui.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="fragmentShaderOld.glsl">
-      <Filter>源文件</Filter>
-    </None>
-    <None Include="vertexShaderOld.glsl">
-      <Filter>源文件</Filter>
-    </None>
+    <ClInclude Include="libs\include\imgui\imgui_impl_glfw.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\CameraTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\CoordinateSystemTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\ObjLoaderTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\TextureTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\TransformationTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Shader\shader_s.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\ShaderTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\Tests.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\Tests\ImguiTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\FlowGL\Cube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\FlowGL\Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\FlowGL\ObjLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\FlowGL\Square.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\FlowGL\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\FlowGL\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\include\src\FlowGL\Triangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
