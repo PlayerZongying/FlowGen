@@ -31,7 +31,7 @@ Cube* myCube;
 
 Texture* myTexture;
 Texture* myConcreteTexture;
-Mesh* MonkeyMesh;
+Mesh* FlagMesh;
 
 float myWidth;
 float myHeight;
@@ -60,7 +60,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(aWidth, aHeight, "Monky", NULL, NULL);
+	window = glfwCreateWindow(aWidth, aHeight, "Flow", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
 	myWidth = aWidth;
@@ -78,12 +78,12 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 		return someData;
 	}
 
-	myConcreteTexture = new Texture("../Assets/Images/Grass.png");
-	myTexture = new Texture("../Assets/Images/Default.png");
-	myShader = new Shader("../Assets/Shaders/VertexShader.glsl", "../Assets/Shaders/FragmentShader.glsl");
-	myBillboard = new Shader("../Assets/Shaders/VertexBillboard.glsl", "../Assets/Shaders/FragmentShader.glsl");
+	myConcreteTexture = new Texture("Assets/Images/Grass.png");
+	myTexture = new Texture("Assets/Images/Default.png");
+	myShader = new Shader("Assets/Shaders/VertexShader.glsl", "Assets/Shaders/FragmentShader.glsl");
+	myBillboard = new Shader("Assets/Shaders/VertexBillboard.glsl", "Assets/Shaders/FragmentShader.glsl");
 
-	MonkeyMesh = LoadObjMesh("../Assets/Models/Monkey.obj");
+	FlagMesh = LoadObjMesh("Assets/Models/Flag.obj");
 
 	myCube = new Cube();
 	mySquare = new Square();
@@ -96,12 +96,12 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 	glEnable(GL_DEPTH_TEST);
 	glfwSwapInterval(1);
 
-	//for (size_t i = 0; i < 3; i++)
-	//{
-	//	VirtualObject* monkey = new VirtualObject(MonkeyMesh, myTexture, myShader);
-	//	myObjects.push_back(monkey);
-	//	monkey->Position = glm::vec3(i * 2.0f, 0.0f, 0);
-	//}
+	for (size_t i = 0; i < 3; i++)
+	{
+		VirtualObject* monkey = new VirtualObject(FlagMesh, myTexture, myShader);
+		myObjects.push_back(monkey);
+		monkey->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+	}
 
 	return someData;
 }

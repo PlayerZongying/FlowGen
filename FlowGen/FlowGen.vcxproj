@@ -131,6 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\include\src\FlowEditor\FlowGUI.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\ObjectEntry.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\ResourceEditor.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\ShaderEditor.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Camera.cpp">
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -211,10 +215,16 @@
     <ClCompile Include="libs\include\src\FlowGL\VirtualObject.cpp" />
     <ClCompile Include="libs\include\src\Flow\ETime.cpp" />
     <ClCompile Include="libs\include\src\Flow\FlowGen.cpp" />
+    <ClCompile Include="libs\include\src\Flow\MemoryHelper.cpp" />
+    <ClCompile Include="libs\include\src\Flow\ResourceHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="libs\include\imgui\imgui.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\FlowGUI.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\ObjectEntry.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\ResourceEditor.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\ShaderEditor.h" />
     <ClInclude Include="libs\include\src\FlowGL\Camera.h" />
     <ClInclude Include="libs\include\src\FlowGL\Cube.h" />
     <ClInclude Include="libs\include\src\FlowGL\FlowGraphics.h" />
@@ -230,6 +240,8 @@
     <ClInclude Include="libs\include\src\Flow\FlowGen.h" />
     <ClInclude Include="libs\include\src\Flow\FlyingCamera.h" />
     <ClInclude Include="libs\include\src\Flow\Input.h" />
+    <ClInclude Include="libs\include\src\Flow\MemoryHelper.h" />
+    <ClInclude Include="libs\include\src\Flow\ResourceHandler.h" />
     <ClInclude Include="libs\include\src\Tests\CameraTest.h" />
     <ClInclude Include="libs\include\src\Tests\CoordinateSystemTest.h" />
     <ClInclude Include="libs\include\src\Tests\ObjLoaderTest.h" />
@@ -336,17 +348,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\include\src\Tests\ImguiTest.h" />
-    <Content Include="Models\Flag.obj" />
-    <Content Include="Shader\CoordinateSystemTestFS.glsl" />
-    <Content Include="Shader\CoordinateSystemTestVS.glsl" />
-    <Content Include="Shader\fragmentShader.glsl" />
-    <Content Include="Shader\TextureTestFS.glsl" />
-    <Content Include="Shader\TextureTestVS.glsl" />
-    <Content Include="Shader\TransformationTestFS.glsl" />
-    <Content Include="Shader\TransformationTestVS.glsl" />
-    <Content Include="Shader\vertexShader.glsl" />
-    <Content Include="Textures\Girl_with_a_Pearl_Earring.jpg" />
-    <Content Include="Textures\Mona_Lisa.jpg" />
+    <Content Include="Assets\Models\Flag.obj" />
+    <Content Include="Assets\Shaders\CoordinateSystemTestFS.glsl" />
+    <Content Include="Assets\Shaders\CoordinateSystemTestVS.glsl" />
+    <Content Include="Assets\Shaders\fragmentShader.glsl" />
+    <Content Include="Assets\Shaders\TextureTestFS.glsl" />
+    <Content Include="Assets\Shaders\TextureTestVS.glsl" />
+    <Content Include="Assets\Shaders\TransformationTestFS.glsl" />
+    <Content Include="Assets\Shaders\TransformationTestVS.glsl" />
+    <Content Include="Assets\Shaders\vertexShader.glsl" />
+    <Content Include="Assets\Textures\Girl_with_a_Pearl_Earring.jpg" />
+    <Content Include="Assets\Textures\Mona_Lisa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

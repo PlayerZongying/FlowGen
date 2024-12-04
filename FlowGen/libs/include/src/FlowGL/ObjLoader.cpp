@@ -8,9 +8,13 @@
 #include <glm/glm.hpp>  
 #include <algorithm>
 #include "Mesh.h"
+#include <src/Flow/MemoryHelper.h>
 
 bool Flow::LoadOBJ(const std::string& filename, ObjData& outData)
 {
+    
+    MemoryHelper::CheckAvailableMemoryInMB();
+    
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Failed to open OBJ file: " << filename << std::endl;

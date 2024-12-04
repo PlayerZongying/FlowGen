@@ -1,6 +1,6 @@
 ﻿#include "Camera.h"
 #include "Camera.h"
-#include "MonkyGraphics.h"
+#include <src/FlowGL/FlowGraphics.h>
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
