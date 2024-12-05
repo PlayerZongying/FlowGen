@@ -76,3 +76,45 @@ std::vector<std::string> ResourceHandler::GetAllResources()
 
     return ReturnVector;
 }
+
+
+
+// msg queue
+void ResourceHandler::QueueMessage(Message* msg)
+{
+    std::lock_guard<std::mutex> lock(queueMutex);
+    messages.push(msg);
+    queueCV.notify_one();
+}
+
+void ResourceHandler::ProcessMessages()
+{
+    while (!messages.empty())
+    {
+        std::unique_lock<std::mutex> lock(queueMutex);
+
+        queueCV.wait(lock, [this] { return !messages.empty(); });
+
+        Message* msg = messages.front();
+        messages.pop();
+
+        ProcessMessage(msg);
+
+    }
+}
+
+void ResourceHandler::ProcessMessage(Message* msg)
+{
+    switch (msg->type)
+    {
+    case MessageType::OBJMeshLoading:
+        // Flow::ObjData outData;
+        // Flow::LoadOBJ(msg->msg, outData);
+        Mesh* newMesh = Flow::LoadObjMesh(msg->msg);
+        std::string meshPath = msg->msg;
+        myMeshes[meshPath] = newMesh;
+        break;
+
+    }
+
+}

@@ -106,6 +106,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)libs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,7 +136,21 @@
     <ClCompile Include="libs\include\src\FlowEditor\ObjectEntry.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\ResourceEditor.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\ShaderEditor.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Camera.cpp">
+    <ClCompile Include="libs\include\src\FlowGL\Camera.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Cube.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\FlowGraphics.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Mesh.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\ObjLoader.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Shader.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Square.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\stb_image.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Texture.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Triangle.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\VirtualObject.cpp" />
+    <ClCompile Include="libs\include\src\Flow\ETime.cpp" />
+    <ClCompile Include="libs\include\src\Flow\FlowGen.cpp" />
+    <ClCompile Include="libs\include\src\Flow\MemoryHelper.cpp" />
+    <ClCompile Include="libs\include\src\Flow\Message\Message.cpp">
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -164,7 +179,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <MinimalRebuild>false</MinimalRebuild>
       <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
@@ -207,15 +222,10 @@
       <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\GithubRepository\Graphics\OpenGL\FlowGen\FlowGen\libs\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Github Repository\FlowGen\FlowGen\libs\include;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="libs\include\src\FlowGL\FlowGraphics.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Shader.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\VirtualObject.cpp" />
-    <ClCompile Include="libs\include\src\Flow\ETime.cpp" />
-    <ClCompile Include="libs\include\src\Flow\FlowGen.cpp" />
-    <ClCompile Include="libs\include\src\Flow\MemoryHelper.cpp" />
+    <ClCompile Include="libs\include\src\Flow\Message\MessageQueue.cpp" />
     <ClCompile Include="libs\include\src\Flow\ResourceHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="libs\include\imgui\imgui.h" />
@@ -241,6 +251,8 @@
     <ClInclude Include="libs\include\src\Flow\FlyingCamera.h" />
     <ClInclude Include="libs\include\src\Flow\Input.h" />
     <ClInclude Include="libs\include\src\Flow\MemoryHelper.h" />
+    <ClInclude Include="libs\include\src\Flow\Message\Message.h" />
+    <ClInclude Include="libs\include\src\Flow\Message\MessageQueue.h" />
     <ClInclude Include="libs\include\src\Flow\ResourceHandler.h" />
     <ClInclude Include="libs\include\src\Tests\CameraTest.h" />
     <ClInclude Include="libs\include\src\Tests\CoordinateSystemTest.h" />
@@ -326,13 +338,6 @@
     <ClCompile Include="libs\include\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="libs\include\imgui\imgui_tables.cpp" />
     <ClCompile Include="libs\include\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Cube.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Mesh.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\ObjLoader.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Square.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\stb_image.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Texture.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Triangle.cpp" />
     <ClCompile Include="libs\include\src\Flow\FlyingCamera.cpp" />
     <ClCompile Include="libs\include\src\Flow\Input.cpp" />
     <ClCompile Include="libs\src\glad.c" />

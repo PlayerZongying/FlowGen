@@ -35,6 +35,8 @@ void Engine::FlyingCamera::Update(GLFWwindow* aWindow)
 
     if (Editing) return;
 
+    if(!myInput->GetIsRightMousePressed()) return;
+
     if (myInput->IsKeyDown(GLFW_KEY_W)) velocity.z = 1;
     if (myInput->IsKeyDown(GLFW_KEY_A)) velocity.x = -1;
     if (myInput->IsKeyDown(GLFW_KEY_S)) velocity.z = -1;

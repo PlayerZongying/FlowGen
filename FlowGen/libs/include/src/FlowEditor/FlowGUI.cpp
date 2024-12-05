@@ -48,7 +48,7 @@ void Flow::FlowGUI::Render(std::vector<VirtualObject*> someObjects)
 	ImGui::NewFrame();
 
 
-	ImGui::Begin("Monky", &alwaysTrue, ImGuiWindowFlags_MenuBar);
+	ImGui::Begin("Flow", &alwaysTrue, ImGuiWindowFlags_MenuBar);
 
 	if (ImGui::BeginMenuBar())
 	{

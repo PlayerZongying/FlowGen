@@ -3,16 +3,20 @@
 #include <vector>
 #include <string>
 
+#include "Message/MessageQueue.h"
+
 class Texture;
 class Shader;
 class Mesh;
 
-class ResourceHandler
+class ResourceHandler: public MessageQueue
 {
 public:
 
     ResourceHandler();
     ~ResourceHandler();
+
+    void QueueMessage(Message* msg) override; 
 
     void CreateShader	(const char* aVertexPath,	const char* aFragmentPath, std::string aName);
     void CreateTexture	(const char* aTexturePath,	std::string aName);
@@ -29,5 +33,14 @@ private:
     std::unordered_map<std::string, Texture* >	myTextures;
     std::unordered_map<std::string, Shader*	>	myShaders;
     std::unordered_map<std::string, Mesh*	>	myMeshes;
+
+
+    std::mutex queueMutex;
+    std::condition_variable queueCV;
+
+    void ProcessMessages();
+    void ProcessMessage(Message* msg);
+
+    std::queue<Message*> messages;
 };
 

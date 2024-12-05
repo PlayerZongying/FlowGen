@@ -19,5 +19,9 @@ namespace Flow
     bool LoadOBJ(const std::string& filename, ObjData& outData);
     Mesh* LoadObjMesh(const std::string& filename);
 
+    void SerializeObjData(const std::string& filePath, ObjData& objData);
+
+    ObjData DeserializeObjData(const std::string& filePath);
+
     
 }
