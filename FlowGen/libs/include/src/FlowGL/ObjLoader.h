@@ -16,7 +16,7 @@ namespace Flow
         std::vector<unsigned int> indices;
     };
 
-    bool LoadOBJ(const std::string& filename, ObjData& outData);
+    bool LoadOBJ(const std::string& filePath, ObjData& outData);
     Mesh* LoadObjMesh(const std::string& filename);
 
     void SerializeObjData(const std::string& filePath, ObjData& objData);

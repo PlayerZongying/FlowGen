@@ -12,24 +12,26 @@
 #include <time.h>
 #include <src/Flow/MemoryHelper.h>
 
-bool Flow::LoadOBJ(const std::string& filename, ObjData& outData)
+#include "src/Flow/ResourceHandler.h"
+
+bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 {
     MemoryHelper::CheckAvailableMemoryInMB();
 
-    std::string binaryFilePath = filename + ".bin";
+    std::string binaryFilePath = filePath + ".bin";
 
 
-    std::ifstream file(filename);
+    std::ifstream file(filePath);
     if (!file.is_open())
     {
-        std::cerr << "Failed to open OBJ file: " << filename << std::endl;
+        std::cerr << "Failed to open OBJ file: " << filePath << std::endl;
         return false;
     }
 
     //Check if the serialized file exists and if it is newer then .obj file
     if (std::filesystem::exists(binaryFilePath))
     {
-        auto objTime = std::filesystem::last_write_time(filename);
+        auto objTime = std::filesystem::last_write_time(filePath);
         auto binTime = std::filesystem::last_write_time(binaryFilePath);
 
         if (objTime < binTime)
@@ -96,12 +98,14 @@ bool Flow::LoadOBJ(const std::string& filename, ObjData& outData)
         }
     }
     end = clock();
-    std::cout << "Loading from obj file: " << filename << std::endl;
+    std::cout << "Loading from obj file: " << filePath << std::endl;
     std::cout << "Time used in seconds: " << (double)(end - start)/CLOCKS_PER_SEC << std::endl;
 
     file.close();
 
     SerializeObjData(binaryFilePath, outData);
+    
+    
     return true;
 }
 

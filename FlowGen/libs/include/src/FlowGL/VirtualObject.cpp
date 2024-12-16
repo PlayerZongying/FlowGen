@@ -5,6 +5,8 @@
 #include "Shader.h"
 #include "Texture.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <fstream>
+#include <sstream>
 
 VirtualObject::VirtualObject(Mesh* aMesh, Texture* aTexture, Shader* aShader)
 {
@@ -54,6 +56,22 @@ void VirtualObject::Draw(Flow::Camera* aCamera)
     myMesh->Draw(myShader);
 
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+bool VirtualObject::WriteTo(std::ofstream * outFile)
+{
+    outFile->write(reinterpret_cast<const char*>(&Position), sizeof(float) * 3);
+    outFile->write(reinterpret_cast<const char*>(&Scale), sizeof(float) * 3);
+    outFile->write(reinterpret_cast<const char*>(&Rotation), sizeof(float) * 3);
+    return true;
+}
+
+bool VirtualObject::ReadFrom(std::ifstream * inFile)
+{
+    inFile->read(reinterpret_cast<char*>(&Position), sizeof(float) * 3);
+    inFile->read(reinterpret_cast<char*>(&Scale), sizeof(float) * 3);
+    inFile->read(reinterpret_cast<char*>(&Rotation), sizeof(float) * 3);
+    return false;
 }
 
 Shader* VirtualObject::GetShader()

@@ -14,7 +14,9 @@ int main()
     ResourceHandler* resources = new ResourceHandler();
     Flow::FlowInitializeData RenderData = Flow::Initialize(1280, 720);
     Engine::FlowGen* engine = new Engine::FlowGen(RenderData.aWindow, RenderData.aCamera);
-    Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, resources);
+    
+    // Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, resources);
+    Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, engine, resources);
 
 
     glfwSetInputMode(RenderData.aWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);

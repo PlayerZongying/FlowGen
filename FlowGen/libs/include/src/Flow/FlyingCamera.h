@@ -31,6 +31,7 @@ namespace Engine
         float yaw, pitch;
 
         bool Editing = false;
+        bool DoOnce = false;
 
         double lastX, lastY;
     };

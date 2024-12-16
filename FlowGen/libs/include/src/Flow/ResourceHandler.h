@@ -3,7 +3,9 @@
 #include <vector>
 #include <string>
 
+#include "GLFW/glfw3native.h"
 #include "Message/MessageQueue.h"
+#include "src/FlowGL/Mesh.h"
 
 class Texture;
 class Shader;
@@ -13,6 +15,11 @@ class ResourceHandler: public MessageQueue
 {
 public:
 
+    static ResourceHandler& Instance() {
+        static ResourceHandler instance; 
+        return instance;
+    }
+
     ResourceHandler();
     ~ResourceHandler();
 
@@ -21,6 +28,7 @@ public:
     void CreateShader	(const char* aVertexPath,	const char* aFragmentPath, std::string aName);
     void CreateTexture	(const char* aTexturePath,	std::string aName);
     void CreateMesh		(const char* aModelPath,	std::string aName);
+    void AddMesh        (Mesh* mesh, std::string aName);
 
     Shader*		GetShader(std::string	aName);
     Texture*	GetTexture(std::string	aName);
@@ -29,6 +37,9 @@ public:
     std::vector<std::string> GetAllResources();
 
 private:
+
+    ResourceHandler(const ResourceHandler&) = delete;            // 禁止拷贝
+    ResourceHandler& operator=(const ResourceHandler&) = delete; // 禁止赋值
 
     std::unordered_map<std::string, Texture* >	myTextures;
     std::unordered_map<std::string, Shader*	>	myShaders;

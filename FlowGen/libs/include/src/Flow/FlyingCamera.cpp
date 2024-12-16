@@ -28,15 +28,21 @@ void Engine::FlyingCamera::Update(GLFWwindow* aWindow)
     glm::vec3 velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 direction = glm::vec3(0.0f, 0.0f, 0.0f);
 
-    if (myInput->IsKeyPressed(GLFW_KEY_TAB))
+    // if (myInput->IsKeyPressed(GLFW_KEY_TAB))
+    // {
+    //     SetCamState(aWindow);
+    // }
+    //
+    // if (Editing) return;
+
+    if(!myInput->GetIsRightMousePressed())
     {
-        SetCamState(aWindow);
+        DoOnce = false;
+        return;
     }
 
-    if (Editing) return;
-
-    if(!myInput->GetIsRightMousePressed()) return;
-
+    
+    // move with WASD
     if (myInput->IsKeyDown(GLFW_KEY_W)) velocity.z = 1;
     if (myInput->IsKeyDown(GLFW_KEY_A)) velocity.x = -1;
     if (myInput->IsKeyDown(GLFW_KEY_S)) velocity.z = -1;
@@ -45,17 +51,26 @@ void Engine::FlyingCamera::Update(GLFWwindow* aWindow)
     if (myInput->IsKeyDown(GLFW_KEY_SPACE)) velocity.y = 1;
     if (myInput->IsKeyDown(GLFW_KEY_LEFT_SHIFT)) velocity.y = -1;
 
+
+    // rotate with cursor
     float xpos, ypos;
     xpos = myInput->GetCursorX();
     ypos = myInput->GetCursorY();
+
+    if(DoOnce == false)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        DoOnce = true;
+    }
 
     float xoffset = xpos - lastX;
     float yoffset = lastY - ypos; // reversed since y-coordinates range from bottom to top
     lastX = xpos;
     lastY = ypos;
 
-    //*myTime->DeltaTime()
-    //	* myTime->DeltaTime()
+    // *myTime->DeltaTime()
+    // 	* myTime->DeltaTime()
 
     xoffset *= Sensitivity;
     yoffset *= Sensitivity;

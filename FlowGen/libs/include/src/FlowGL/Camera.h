@@ -31,6 +31,8 @@ namespace Flow
 
         void Move(const glm::vec3& aMove);
         void SetDirection(const glm::vec3& aDirection);
+
+        glm::vec3 GetPosition();
     };
 }
 

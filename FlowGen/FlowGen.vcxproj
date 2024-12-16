@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\include\src\FlowEditor\CameraEditor.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\FlowGUI.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\ObjectEntry.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\ResourceEditor.cpp" />
@@ -139,6 +140,8 @@
     <ClCompile Include="libs\include\src\FlowGL\Camera.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Cube.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\FlowGraphics.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\IWritable.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Level.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Mesh.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\ObjLoader.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Shader.cpp" />
@@ -231,6 +234,7 @@
     <ClInclude Include="libs\include\imgui\imgui.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\CameraEditor.h" />
     <ClInclude Include="libs\include\src\FlowEditor\FlowGUI.h" />
     <ClInclude Include="libs\include\src\FlowEditor\ObjectEntry.h" />
     <ClInclude Include="libs\include\src\FlowEditor\ResourceEditor.h" />
@@ -238,6 +242,8 @@
     <ClInclude Include="libs\include\src\FlowGL\Camera.h" />
     <ClInclude Include="libs\include\src\FlowGL\Cube.h" />
     <ClInclude Include="libs\include\src\FlowGL\FlowGraphics.h" />
+    <ClInclude Include="libs\include\src\FlowGL\IWritable.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Level.h" />
     <ClInclude Include="libs\include\src\FlowGL\Mesh.h" />
     <ClInclude Include="libs\include\src\FlowGL\ObjLoader.h" />
     <ClInclude Include="libs\include\src\FlowGL\Shader.h" />
@@ -353,6 +359,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\include\src\Tests\ImguiTest.h" />
+    <Content Include="Assets\Images\Concrete.png" />
+    <Content Include="Assets\Images\Default.png" />
+    <Content Include="Assets\Images\Girl_with_a_Pearl_Earring.jpg" />
+    <Content Include="Assets\Images\Grass.png" />
+    <Content Include="Assets\Images\Mona_Lisa.jpg" />
     <Content Include="Assets\Models\Flag.obj" />
     <Content Include="Assets\Shaders\CoordinateSystemTestFS.glsl" />
     <Content Include="Assets\Shaders\CoordinateSystemTestVS.glsl" />
@@ -362,11 +373,9 @@
     <Content Include="Assets\Shaders\TransformationTestFS.glsl" />
     <Content Include="Assets\Shaders\TransformationTestVS.glsl" />
     <Content Include="Assets\Shaders\vertexShader.glsl" />
-    <Content Include="Assets\Textures\Girl_with_a_Pearl_Earring.jpg" />
-    <Content Include="Assets\Textures\Mona_Lisa.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <Folder Include="Assets\Levels\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <vector>
+#include <src/Flow/FlowGen.h>
 
 class VirtualObject;
 class ResourceHandler;
@@ -7,6 +8,7 @@ struct GLFWwindow;
 
 class ResourceEditor;
 class ShaderEditor;
+class CameraEditor;
 
 namespace Flow
 {
@@ -15,6 +17,7 @@ namespace Flow
         EObjectHierarchy,
         EShaderEditor,
         EResourceViewer,
+        ECameraEditor,
         COUNT
     };
 
@@ -24,6 +27,7 @@ namespace Flow
     {
     public:
         FlowGUI(GLFWwindow* aWindow, ResourceHandler* aResourceHandler);
+        FlowGUI(GLFWwindow* aWindow, Engine::FlowGen* flowGen, ResourceHandler* aResourceHandler);
         ~FlowGUI();
         void Render(std::vector<VirtualObject*> someObjects);
 
@@ -33,6 +37,7 @@ namespace Flow
         void RepopulateEntries(std::vector<VirtualObject*> someObjects);
         std::vector<ObjectEntry*> myObjectEntries;
         ResourceHandler* myResources;
+        CameraEditor* myCamera;
 
         ECurrentEditor myCurrentEditor;
 

@@ -27,7 +27,7 @@ void Flow::Camera::CameraUpdate()
 
 void Flow::Camera::SetPosition(const glm::vec3& aPosition)
 {
-
+    myPosition = aPosition;
 }
 
 void Flow::Camera::SetRotation(const glm::vec3& aRotation)
@@ -45,4 +45,9 @@ void Flow::Camera::Move(const glm::vec3& aMove)
 void Flow::Camera::SetDirection(const glm::vec3& aDirection)
 {
     myDirection = glm::normalize(aDirection);
+}
+
+glm::vec3 Flow::Camera::GetPosition()
+{
+    return myPosition;
 }

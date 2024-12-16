@@ -9,6 +9,9 @@
 
 #include "ShaderEditor.h"
 #include "ResourceEditor.h"
+#include "CameraEditor.h"
+#include "src/Flow/FlowGen.h"
+#include "src/FlowGL/Level.h"
 
 #define itoc(a) ((char*)(intptr_t)(a))
 
@@ -27,6 +30,24 @@ Flow::FlowGUI::FlowGUI(GLFWwindow* aWindow, ResourceHandler* aResourceHandler)
 
 	myShaderEditor = new ShaderEditor();
 	myResourceEditor = new ResourceEditor(myResources);
+}
+
+Flow::FlowGUI::FlowGUI(GLFWwindow* aWindow, Engine::FlowGen* flowGen, ResourceHandler* aResourceHandler)
+{
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsLight();
+	ImGui_ImplGlfw_InitForOpenGL(aWindow, true);
+	ImGui_ImplOpenGL3_Init("#version 330");
+
+	myResources = aResourceHandler;
+
+	myCurrentEditor = ECurrentEditor::COUNT;
+
+	myShaderEditor = new ShaderEditor();
+	myResourceEditor = new ResourceEditor(myResources);
+	myCamera = new CameraEditor(flowGen->myCamera);
 }
 
 
@@ -57,6 +78,7 @@ void Flow::FlowGUI::Render(std::vector<VirtualObject*> someObjects)
 			if (ImGui::MenuItem("Shader Editor", "Ctrl+O"))		{ myCurrentEditor = ECurrentEditor::EShaderEditor;		}
 			if (ImGui::MenuItem("Resource Viewer", "Ctrl+S"))	{ myCurrentEditor = ECurrentEditor::EResourceViewer;	}
 			if (ImGui::MenuItem("Object Hierarchy", "Ctrl+W"))	{ myCurrentEditor = ECurrentEditor::EObjectHierarchy;	}
+			if (ImGui::MenuItem("Camera Viewer", "Ctrl+C"))	    { myCurrentEditor = ECurrentEditor::ECameraEditor;	}
 			ImGui::EndMenu();
 		}
 		ImGui::EndMenuBar();
@@ -80,6 +102,12 @@ void Flow::FlowGUI::Render(std::vector<VirtualObject*> someObjects)
 
 		myResourceEditor->Update();
 
+		break;
+
+	case Flow::ECurrentEditor::ECameraEditor:
+		
+		myCamera->Update();
+		
 		break;
 
 	case Flow::ECurrentEditor::COUNT:
@@ -108,7 +136,10 @@ void Flow::FlowGUI::UpdateHierarchy(std::vector<VirtualObject*> someObjects)
 		RepopulateEntries(someObjects);
 	}
 
-	ImGui::BeginChild("Scrolling");
+	ImVec2 availableSpace = ImGui::GetContentRegionAvail();
+	float buttonHeight = 100.0f;
+
+	ImGui::BeginChild("Scrolling", ImVec2(0, availableSpace.y - buttonHeight), true);
 	for (size_t i = 0; i < myObjectEntries.size(); i++)
 	{
 		std::string number = std::to_string(i);
@@ -135,6 +166,29 @@ void Flow::FlowGUI::UpdateHierarchy(std::vector<VirtualObject*> someObjects)
 		}
 	}
 	ImGui::EndChild();
+
+
+	static char levelNameToSave[128] = "";
+
+	ImGui::InputText("Level To Save", levelNameToSave, sizeof(levelNameToSave));
+
+	if(ImGui::Button("Save"))
+	{
+		const std::string fileName(levelNameToSave);
+		Level::SaveLevel(fileName);
+	}
+
+	static char levelNameToLoad[128] = "";
+
+	ImGui::InputText("Level To Load", levelNameToLoad, sizeof(levelNameToLoad));
+
+	
+	if(ImGui::Button("Load"))
+	{
+		const std::string fileName(levelNameToLoad);
+		Level::LoadLevel(fileName);
+	
+	}
 }
 
 void Flow::FlowGUI::RepopulateEntries(std::vector<VirtualObject*> someObjects)

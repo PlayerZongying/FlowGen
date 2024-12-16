@@ -8,7 +8,7 @@
 
 ResourceHandler::ResourceHandler()
 {
-
+    
 }
 
 ResourceHandler::~ResourceHandler()
@@ -38,6 +38,11 @@ void ResourceHandler::CreateMesh(const char* aModelPath, std::string aName)
     Mesh* newMesh = Flow::LoadObjMesh(aModelPath);
 
     myMeshes.emplace(aName, newMesh);
+}
+
+void ResourceHandler::AddMesh(Mesh* mesh, std::string aName)
+{
+    myMeshes.emplace(aName, mesh);
 }
 
 Shader* ResourceHandler::GetShader(std::string aName)
@@ -110,6 +115,8 @@ void ResourceHandler::ProcessMessage(Message* msg)
     case MessageType::OBJMeshLoading:
         // Flow::ObjData outData;
         // Flow::LoadOBJ(msg->msg, outData);
+
+        // more message reply
         Mesh* newMesh = Flow::LoadObjMesh(msg->msg);
         std::string meshPath = msg->msg;
         myMeshes[meshPath] = newMesh;

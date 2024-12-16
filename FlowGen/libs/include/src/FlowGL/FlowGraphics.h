@@ -29,5 +29,7 @@ namespace Flow
 
     std::vector<VirtualObject*> GetObjects();
 
+    void ClearObjects();
+
 
 }

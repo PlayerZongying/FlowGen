@@ -24,6 +24,9 @@ private:
     std::vector<unsigned int> myIndices;
     int IndicesSize = 0;
 
+
+    std::string MeshFilePath;
+
 protected:
     unsigned int VBO, VAO, EBO;
 
