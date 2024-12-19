@@ -145,6 +145,8 @@ void Flow::FlowGUI::UpdateHierarchy(std::vector<VirtualObject*> someObjects)
 		std::string number = std::to_string(i);
 		std::string Title = "Object " + number;
 
+		Title = someObjects[i]->ObjectName;
+
 		if (ImGui::Button(Title.c_str()))
 		{
 			myObjectEntries[i]->Opened = !myObjectEntries[i]->Opened;
