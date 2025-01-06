@@ -50,6 +50,10 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
     std::string line;
     clock_t start, end;
     start = clock();
+
+    bool has_vt = false;
+    bool has_vn = false;
+    
     while (std::getline(file, line))
     {
         std::istringstream ss(line);
@@ -64,12 +68,14 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
         }
         else if (prefix == "vn")
         {
+            has_vn = true;
             glm::vec3 normal;
             ss >> normal.x >> normal.y >> normal.z;
             outData.normals.push_back(normal);
         }
         else if (prefix == "vt")
         {
+            has_vt = true;
             glm::vec2 texCoord;
             ss >> texCoord.x >> texCoord.y;
             outData.texCoords.push_back(texCoord);
@@ -78,22 +84,95 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
         {
             unsigned int vIndex[3], tIndex[3], nIndex[3];
             char slash;
-            for (int i = 0; i < 3; ++i)
+
+            // f v
+            if(!has_vt && !has_vn)
             {
-                ss >> vIndex[i] >> slash >> tIndex[i] >> slash >> nIndex[i];
-                outData.indices.push_back(vIndex[i] - 1);
+                for (int i = 0; i < 3; ++i)
+                {
+                    ss >> vIndex[i];
+                    outData.indices.push_back(vIndex[i] - 1);
+                }
+
+                // in case the face has 4 vertices
+                unsigned int v4;
+                ss >> v4;
+                if (!ss.fail())
+                {
+                    // std::cout<<"a quad here"<<std::endl;
+
+                    outData.indices.push_back(vIndex[0] - 1);
+                    outData.indices.push_back(vIndex[2] - 1);
+                    outData.indices.push_back(v4 - 1);
+                }
+            }
+            
+            // f v/t
+            else if(has_vt && !has_vn) 
+            {
+                for (int i = 0; i < 3; ++i)
+                {
+                    ss >> vIndex[i] >> slash >> tIndex[i];
+                    outData.indices.push_back(vIndex[i] - 1);
+                }
+
+                // in case the face has 4 vertices
+                unsigned int v4, t4;
+                ss >> v4 >> slash >> t4;
+                if (!ss.fail())
+                {
+                    // std::cout<<"a quad here"<<std::endl;
+
+                    outData.indices.push_back(vIndex[0] - 1);
+                    outData.indices.push_back(vIndex[2] - 1);
+                    outData.indices.push_back(v4 - 1);
+                }
+            }
+            
+
+            
+            // f v//n
+            else if(!has_vt && has_vn)
+            {
+                for (int i = 0; i < 3; ++i)
+                {
+                    ss >> vIndex[i] >> slash >> slash >> nIndex[i];
+                    outData.indices.push_back(vIndex[i] - 1);
+                }
+
+                // in case the face has 4 vertices
+                unsigned int v4, n4;
+                ss >> v4 >> slash >> slash >> n4;
+                if (!ss.fail())
+                {
+                    // std::cout<<"a quad here"<<std::endl;
+
+                    outData.indices.push_back(vIndex[0] - 1);
+                    outData.indices.push_back(vIndex[2] - 1);
+                    outData.indices.push_back(v4 - 1);
+                }
             }
 
-            // in case the face has 4 vertices
-            unsigned int v4, t4, n4;
-            ss >> v4 >> slash >> t4 >> slash >> n4;
-            if (!ss.fail())
+            // f v/t/n
+            else
             {
-                // std::cout<<"a quad here"<<std::endl;
+                for (int i = 0; i < 3; ++i)
+                {
+                    ss >> vIndex[i] >> slash >> tIndex[i] >> slash >> nIndex[i];
+                    outData.indices.push_back(vIndex[i] - 1);
+                }
 
-                outData.indices.push_back(vIndex[0] - 1);
-                outData.indices.push_back(vIndex[2] - 1);
-                outData.indices.push_back(v4 - 1);
+                // in case the face has 4 vertices
+                unsigned int v4, t4, n4;
+                ss >> v4 >> slash >> t4 >> slash >> n4;
+                if (!ss.fail())
+                {
+                    // std::cout<<"a quad here"<<std::endl;
+
+                    outData.indices.push_back(vIndex[0] - 1);
+                    outData.indices.push_back(vIndex[2] - 1);
+                    outData.indices.push_back(v4 - 1);
+                }
             }
         }
     }

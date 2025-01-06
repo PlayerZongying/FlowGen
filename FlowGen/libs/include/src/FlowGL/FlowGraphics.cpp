@@ -38,6 +38,7 @@ Mesh* PlaneMesh;
 Mesh* FlagMesh;
 Mesh* MonkeyMesh;
 Mesh* TeapotMesh;
+Mesh* SwordMesh;
 
 float myWidth;
 float myHeight;
@@ -93,6 +94,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
     ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
     ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
 
 
@@ -101,6 +103,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     MonkeyMesh = ResourceHandler::Instance().GetMesh("monkey");
     TeapotMesh = ResourceHandler::Instance().GetMesh("teapot");
     CubeMesh = ResourceHandler::Instance().GetMesh("cube");
+    SwordMesh = ResourceHandler::Instance().GetMesh("sword");
     // FlagMesh = LoadObjMesh("Assets/Models/Flag.obj");
 
     // MonkeyMesh = LoadObjMesh("Assets/Models/monkey.obj");
@@ -126,7 +129,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     for (size_t i = 0; i < 3; i++)
     {
-        VirtualObject* monkey = new VirtualObject(FlagMesh, myTexture, myShader);
+        VirtualObject* monkey = new VirtualObject(MonkeyMesh, myTexture, myShader);
         monkey->ObjectName = "monkey_" + std::to_string(i);
         myObjects.push_back(monkey);
         monkey->Position = glm::vec3(i * 2.0f, -1.0f, -2);
@@ -134,10 +137,11 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     for (size_t i = 0; i < 3; i++)
     {
-        VirtualObject* teapot = new VirtualObject(CubeMesh, myTexture, myShader);
+        VirtualObject* teapot = new VirtualObject(TeapotMesh, myTexture, myShader);
         teapot->ObjectName = "teapot_" + std::to_string(i);
         myObjects.push_back(teapot);
         teapot->Position = glm::vec3(i * 2.0f, -2.0f, 4);
+        teapot->Scale = glm::vec3(.01f, .01f, .01f);
     }
 
     return someData;
