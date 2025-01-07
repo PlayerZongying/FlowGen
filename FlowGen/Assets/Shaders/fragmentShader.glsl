@@ -3,6 +3,7 @@ out vec4 FragColor;
   
 in vec4 vertexColor; 
 in vec2 texcoord;
+in vec3 normal;
 
 uniform sampler2D Texture;
 
@@ -14,4 +15,5 @@ void main()
         discard;
 
     FragColor = texColor;
+
 } 

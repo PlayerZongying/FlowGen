@@ -53,6 +53,33 @@ void VirtualObject::Draw(Flow::Camera* aCamera)
     myShader->SetMatrix4(trans, "transform");
     myShader->SetMatrix4(aCamera->myView, "view");
     myShader->SetMatrix4(aCamera->myProjection, "projection");
+
+    myShader->SetVector3(aCamera->GetPosition(), "viewPos");
+
+    glm::vec3 lightPos(0.0f, 15.0f, 5.0f);
+    glm::vec3 lightAmbient(1.0f, 1.0f, 1.0f);
+    glm::vec3 lightDiffuse(1.0f, 1.0f, 1.0f);
+    glm::vec3 lightSpecular(1.0f, 1.0f, 1.0f);
+    
+    myShader->SetVector3(lightPos, "light.position");
+    myShader->SetVector3(lightAmbient, "light.ambient");
+    myShader->SetVector3(lightDiffuse, "light.diffuse");
+    myShader->SetVector3(lightSpecular, "light.specular");
+
+    glm::vec3 materialAmbient(1.0f, 0.5f, 0.31f);
+    glm::vec3 materialDiffuse(1.0f, 0.5f, 0.31f);
+    glm::vec3 materialSpecular(0.5f, 0.5f, 0.5f);
+    float shininess = 32.0f;
+
+    myShader->SetVector3(materialAmbient, "material.ambient");
+    myShader->SetVector3(materialDiffuse, "material.diffuse");
+    myShader->SetVector3(materialSpecular, "material.specular");
+    myShader->SetFloat(shininess, "material.shininess");
+
+    glm::vec4 testColor(0.5f, 0.5f, 0.5f, 1.f);
+    myShader->SetVector4(testColor, "testColor");
+
+
     myMesh->Draw(myShader);
 
     glBindTexture(GL_TEXTURE_2D, 0);

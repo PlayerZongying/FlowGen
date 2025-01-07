@@ -141,12 +141,14 @@ void Shader::SetMatrix4(glm::mat4 aMatrix, const std::string& aName)
 
 void Shader::SetVector4(glm::vec4 aVector4, const std::string& aName)
 {
-	glUniform4f(glGetUniformLocation(myShaderProgram, aName.c_str()), aVector4.x, aVector4.y, aVector4.z, aVector4.w);
+	int i = glGetUniformLocation(myShaderProgram, aName.c_str());
+	
+	glUniform4f(i, aVector4.x, aVector4.y, aVector4.z, aVector4.w);
 }
 
 void Shader::SetVector3(glm::vec3 aVector3, const std::string& aName)
 {
-
+	glUniform3f(glGetUniformLocation(myShaderProgram, aName.c_str()), aVector3.x, aVector3.y, aVector3.z);
 }
 
 void Shader::SetVector2(glm::vec2 aVector2, const std::string& aName)

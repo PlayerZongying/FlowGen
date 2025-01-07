@@ -365,9 +365,13 @@
     <Content Include="Assets\Images\Grass.png" />
     <Content Include="Assets\Images\Mona_Lisa.jpg" />
     <Content Include="Assets\Models\Flag.obj" />
+    <Content Include="Assets\Shaders\BlinnPhongFS.glsl" />
+    <Content Include="Assets\Shaders\BlinnPhongVS.glsl" />
     <Content Include="Assets\Shaders\CoordinateSystemTestFS.glsl" />
     <Content Include="Assets\Shaders\CoordinateSystemTestVS.glsl" />
     <Content Include="Assets\Shaders\fragmentShader.glsl" />
+    <Content Include="Assets\Shaders\NormalViewFS.glsl" />
+    <Content Include="Assets\Shaders\NormalViewVS.glsl" />
     <Content Include="Assets\Shaders\TextureTestFS.glsl" />
     <Content Include="Assets\Shaders\TextureTestVS.glsl" />
     <Content Include="Assets\Shaders\TransformationTestFS.glsl" />

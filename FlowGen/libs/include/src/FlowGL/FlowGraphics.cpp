@@ -26,6 +26,8 @@ GLFWwindow* window;
 
 Shader* myShader;
 Shader* myBillboard;
+Shader* NormalView;
+Shader* BlinnPhong;
 
 Square* mySquare;
 Triangle* myTriangle;
@@ -39,6 +41,8 @@ Mesh* FlagMesh;
 Mesh* MonkeyMesh;
 Mesh* TeapotMesh;
 Mesh* SwordMesh;
+Mesh* SphereMesh;
+
 
 float myWidth;
 float myHeight;
@@ -90,11 +94,17 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     myShader = new Shader("Assets/Shaders/VertexShader.glsl", "Assets/Shaders/FragmentShader.glsl");
     myBillboard = new Shader("Assets/Shaders/VertexBillboard.glsl", "Assets/Shaders/FragmentShader.glsl");
 
+    // Blinn Phong Test
+    BlinnPhong = new Shader("Assets/Shaders/BlinnPhongVS.glsl", "Assets/Shaders/BlinnPhongFS.glsl");
+    NormalView = new Shader("Assets/Shaders/NormalViewVS.glsl", "Assets/Shaders/NormalViewFS.glsl");
+    
+    
     ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
     ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
     ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
     ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
     ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
 
 
@@ -104,6 +114,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     TeapotMesh = ResourceHandler::Instance().GetMesh("teapot");
     CubeMesh = ResourceHandler::Instance().GetMesh("cube");
     SwordMesh = ResourceHandler::Instance().GetMesh("sword");
+    SphereMesh = ResourceHandler::Instance().GetMesh("sphere");
     // FlagMesh = LoadObjMesh("Assets/Models/Flag.obj");
 
     // MonkeyMesh = LoadObjMesh("Assets/Models/monkey.obj");
@@ -119,33 +130,43 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     glEnable(GL_DEPTH_TEST);
     glfwSwapInterval(1);
 
-    for (size_t i = 0; i < 3; i++)
+    for (size_t i = 0; i < 1; i++)
     {
-        VirtualObject* flag = new VirtualObject(FlagMesh, myTexture, myShader);
+        VirtualObject* flag = new VirtualObject(FlagMesh, myTexture, BlinnPhong);
         flag->ObjectName = "flag_" + std::to_string(i);
         myObjects.push_back(flag);
         flag->Position = glm::vec3(i * 2.0f, 0.0f, 0);
     }
 
-    for (size_t i = 0; i < 3; i++)
+    for (size_t i = 0; i < 1; i++)
     {
-        VirtualObject* monkey = new VirtualObject(MonkeyMesh, myTexture, myShader);
-        monkey->ObjectName = "monkey_" + std::to_string(i);
-        myObjects.push_back(monkey);
-        monkey->Position = glm::vec3(i * 2.0f, -1.0f, -2);
+        VirtualObject* sword = new VirtualObject(MonkeyMesh, myTexture, BlinnPhong);
+        sword->ObjectName = "sword_" + std::to_string(i);
+        myObjects.push_back(sword);
+        sword->Position = glm::vec3(i * 2.0f, 0.0f, 0);
     }
 
-    for (size_t i = 0; i < 3; i++)
-    {
-        VirtualObject* teapot = new VirtualObject(TeapotMesh, myTexture, myShader);
-        teapot->ObjectName = "teapot_" + std::to_string(i);
-        myObjects.push_back(teapot);
-        teapot->Position = glm::vec3(i * 2.0f, -2.0f, 4);
-        teapot->Scale = glm::vec3(.01f, .01f, .01f);
-    }
+    // for (size_t i = 0; i < 3; i++)
+    // {
+    //     VirtualObject* monkey = new VirtualObject(MonkeyMesh, myTexture, BlinnPhong);
+    //     monkey->ObjectName = "monkey_" + std::to_string(i);
+    //     myObjects.push_back(monkey);
+    //     monkey->Position = glm::vec3(i * 2.0f, -1.0f, -2);
+    // }
+    //
+    // for (size_t i = 0; i < 3; i++)
+    // {
+    //     VirtualObject* teapot = new VirtualObject(TeapotMesh, myTexture, myShader);
+    //     teapot->ObjectName = "teapot_" + std::to_string(i);
+    //     myObjects.push_back(teapot);
+    //     teapot->Position = glm::vec3(i * 2.0f, -2.0f, 4);
+    //     teapot->Scale = glm::vec3(.01f, .01f, .01f);
+    // }
 
     return someData;
 }
+
+
 
 void Flow::BeginRender(Camera* aCamera)
 {
