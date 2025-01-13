@@ -102,23 +102,23 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     NormalView = new Shader("Assets/Shaders/NormalViewVS.glsl", "Assets/Shaders/NormalViewFS.glsl");
     
     
-    // ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
-    // ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
-    // ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
-    // ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
-    // ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
-    // ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
     ResourceHandler::Instance().CreateMesh("Assets/Models/apple.obj", "apple");
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
 
 
-    // FlagMesh = ResourceHandler::Instance().GetMesh("Flag");
-    // PlaneMesh = ResourceHandler::Instance().GetMesh("plane");
-    // MonkeyMesh = ResourceHandler::Instance().GetMesh("monkey");
-    // TeapotMesh = ResourceHandler::Instance().GetMesh("teapot");
-    // CubeMesh = ResourceHandler::Instance().GetMesh("cube");
-    // SwordMesh = ResourceHandler::Instance().GetMesh("sword");
-    // SphereMesh = ResourceHandler::Instance().GetMesh("sphere");
+    FlagMesh = ResourceHandler::Instance().GetMesh("Flag");
+    PlaneMesh = ResourceHandler::Instance().GetMesh("plane");
+    MonkeyMesh = ResourceHandler::Instance().GetMesh("monkey");
+    TeapotMesh = ResourceHandler::Instance().GetMesh("teapot");
+    CubeMesh = ResourceHandler::Instance().GetMesh("cube");
+    SwordMesh = ResourceHandler::Instance().GetMesh("sword");
+    SphereMesh = ResourceHandler::Instance().GetMesh("sphere");
     AppleMesh = ResourceHandler::Instance().GetMesh("apple");
     // FlagMesh = LoadObjMesh("Assets/Models/Flag.obj");
 
@@ -149,7 +149,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
         apple->ObjectName = "apple_" + std::to_string(i);
         myObjects.push_back(apple);
         apple->Position = glm::vec3(i * 2.0f, 0.0f, 0);
-        apple->Scale = glm::vec3(10);
+        apple->Scale = glm::vec3(20);
     }
 
     // for (size_t i = 0; i < 3; i++)

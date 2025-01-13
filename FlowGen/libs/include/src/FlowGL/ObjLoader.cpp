@@ -91,6 +91,7 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
         }
         else if (prefix == "f")
         {
+            Vertex vertexInOneFace[3];
             unsigned int vIndex[3], tIndex[3], nIndex[3];
             char slash;
 
@@ -170,8 +171,10 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                     ss >> vIndex[i] >> slash >> tIndex[i] >> slash >> nIndex[i];
                     Vertex newVert;
                     newVert.position = tempPositions[vIndex[i] - 1];
-                    newVert.texCoord = tempPositions[tIndex[i] - 1];
-                    newVert.normal = tempPositions[nIndex[i] - 1];
+                    newVert.texCoord = tempTexCoords[tIndex[i] - 1];
+                    newVert.normal = tempNormals[nIndex[i] - 1];
+
+                    vertexInOneFace[i] = newVert;
 
                     if(uniqeVertices.count(newVert) == 0)
                     {
@@ -182,8 +185,11 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                         std::cout<<"repeated!"<<std::endl;
                     }
 
+                    outData.positions.push_back(newVert.position);
+                    outData.texCoords.push_back(newVert.texCoord);
+                    outData.normals.push_back(newVert.normal);
                     
-                    outData.indices.push_back(vIndex[i] - 1);
+                    outData.indices.push_back(uniqeVertices[newVert]);
                 }
 
                 // in case the face has 4 vertices
