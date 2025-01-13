@@ -42,6 +42,7 @@ Mesh* MonkeyMesh;
 Mesh* TeapotMesh;
 Mesh* SwordMesh;
 Mesh* SphereMesh;
+Mesh* AppleMesh;
 
 
 float myWidth;
@@ -105,6 +106,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
     ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
     ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/apple.obj", "apple");
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
 
 
@@ -115,6 +117,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     CubeMesh = ResourceHandler::Instance().GetMesh("cube");
     SwordMesh = ResourceHandler::Instance().GetMesh("sword");
     SphereMesh = ResourceHandler::Instance().GetMesh("sphere");
+    AppleMesh = ResourceHandler::Instance().GetMesh("apple");
     // FlagMesh = LoadObjMesh("Assets/Models/Flag.obj");
 
     // MonkeyMesh = LoadObjMesh("Assets/Models/monkey.obj");
@@ -130,20 +133,21 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     glEnable(GL_DEPTH_TEST);
     glfwSwapInterval(1);
 
-    for (size_t i = 0; i < 1; i++)
-    {
-        VirtualObject* flag = new VirtualObject(FlagMesh, myTexture, BlinnPhong);
-        flag->ObjectName = "flag_" + std::to_string(i);
-        myObjects.push_back(flag);
-        flag->Position = glm::vec3(i * 2.0f, 0.0f, 0);
-    }
+    // for (size_t i = 0; i < 1; i++)
+    // {
+    //     VirtualObject* sphere = new VirtualObject(SphereMesh, myTexture, BlinnPhong);
+    //     sphere->ObjectName = "sphere_" + std::to_string(i);
+    //     myObjects.push_back(sphere);
+    //     sphere->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+    // }
 
     for (size_t i = 0; i < 1; i++)
     {
-        VirtualObject* sword = new VirtualObject(MonkeyMesh, myTexture, BlinnPhong);
-        sword->ObjectName = "sword_" + std::to_string(i);
-        myObjects.push_back(sword);
-        sword->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+        VirtualObject* apple = new VirtualObject(AppleMesh, myTexture, BlinnPhong);
+        apple->ObjectName = "apple_" + std::to_string(i);
+        myObjects.push_back(apple);
+        apple->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+        apple->Scale = glm::vec3(10);
     }
 
     // for (size_t i = 0; i < 3; i++)
