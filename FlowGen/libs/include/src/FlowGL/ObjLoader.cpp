@@ -64,7 +64,7 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
         {
             glm::vec3 vertex;
             ss >> vertex.x >> vertex.y >> vertex.z;
-            outData.vertices.push_back(vertex);
+            outData.positions.push_back(vertex);
         }
         else if (prefix == "vn")
         {
@@ -211,9 +211,9 @@ void Flow::SerializeObjData(const std::string& filePath, ObjData& objData)
         return;
     }
 
-    size_t vertexCount = objData.vertices.size();
+    size_t vertexCount = objData.positions.size();
     outFile.write(reinterpret_cast<const char*>(&vertexCount), sizeof(vertexCount));
-    outFile.write(reinterpret_cast<const char*>(objData.vertices.data()), vertexCount * sizeof(float) * 3);
+    outFile.write(reinterpret_cast<const char*>(objData.positions.data()), vertexCount * sizeof(float) * 3);
 
     // Write texture coordinate data
     size_t texcoordCount = objData.texCoords.size();
@@ -246,8 +246,8 @@ Flow::ObjData Flow::DeserializeObjData(const std::string& filePath)
     // Read vertex data
     size_t vertexCount;
     inFile.read(reinterpret_cast<char*>(&vertexCount), sizeof(vertexCount * 3));
-    objData.vertices.resize(vertexCount);
-    inFile.read(reinterpret_cast<char*>(objData.vertices.data()), vertexCount * sizeof(float) * 3);
+    objData.positions.resize(vertexCount);
+    inFile.read(reinterpret_cast<char*>(objData.positions.data()), vertexCount * sizeof(float) * 3);
 
     // Read texture coordinate data
     size_t texcoordCount;
