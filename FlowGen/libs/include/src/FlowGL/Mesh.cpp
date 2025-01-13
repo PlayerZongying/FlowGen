@@ -39,11 +39,11 @@ glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
     std::vector<float> vertexData;
-    for (size_t i = 0; i < someData.vertices.size(); ++i)
+    for (size_t i = 0; i < someData.positions.size(); ++i)
     {
-        vertexData.push_back(someData.vertices[i].x);
-        vertexData.push_back(someData.vertices[i].y);
-        vertexData.push_back(someData.vertices[i].z);
+        vertexData.push_back(someData.positions[i].x);
+        vertexData.push_back(someData.positions[i].y);
+        vertexData.push_back(someData.positions[i].z);
 
         if (i < someData.texCoords.size())
         {
