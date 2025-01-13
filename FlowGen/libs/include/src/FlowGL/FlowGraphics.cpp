@@ -35,6 +35,7 @@ Cube* myCube;
 
 Texture* myTexture;
 Texture* myConcreteTexture;
+Texture* appleTexture;
 Mesh* CubeMesh;
 Mesh* PlaneMesh;
 Mesh* FlagMesh;
@@ -92,6 +93,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     myConcreteTexture = new Texture("Assets/Images/Grass.png");
     myTexture = new Texture("Assets/Images/Default.png");
+    appleTexture = new Texture("Assets/Images/Apple.jpg");
     myShader = new Shader("Assets/Shaders/VertexShader.glsl", "Assets/Shaders/FragmentShader.glsl");
     myBillboard = new Shader("Assets/Shaders/VertexBillboard.glsl", "Assets/Shaders/FragmentShader.glsl");
 
@@ -100,23 +102,23 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     NormalView = new Shader("Assets/Shaders/NormalViewVS.glsl", "Assets/Shaders/NormalViewFS.glsl");
     
     
-    ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
     ResourceHandler::Instance().CreateMesh("Assets/Models/apple.obj", "apple");
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
 
 
-    FlagMesh = ResourceHandler::Instance().GetMesh("Flag");
-    PlaneMesh = ResourceHandler::Instance().GetMesh("plane");
-    MonkeyMesh = ResourceHandler::Instance().GetMesh("monkey");
-    TeapotMesh = ResourceHandler::Instance().GetMesh("teapot");
-    CubeMesh = ResourceHandler::Instance().GetMesh("cube");
-    SwordMesh = ResourceHandler::Instance().GetMesh("sword");
-    SphereMesh = ResourceHandler::Instance().GetMesh("sphere");
+    // FlagMesh = ResourceHandler::Instance().GetMesh("Flag");
+    // PlaneMesh = ResourceHandler::Instance().GetMesh("plane");
+    // MonkeyMesh = ResourceHandler::Instance().GetMesh("monkey");
+    // TeapotMesh = ResourceHandler::Instance().GetMesh("teapot");
+    // CubeMesh = ResourceHandler::Instance().GetMesh("cube");
+    // SwordMesh = ResourceHandler::Instance().GetMesh("sword");
+    // SphereMesh = ResourceHandler::Instance().GetMesh("sphere");
     AppleMesh = ResourceHandler::Instance().GetMesh("apple");
     // FlagMesh = LoadObjMesh("Assets/Models/Flag.obj");
 
@@ -143,7 +145,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     for (size_t i = 0; i < 1; i++)
     {
-        VirtualObject* apple = new VirtualObject(AppleMesh, myTexture, BlinnPhong);
+        VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhong);
         apple->ObjectName = "apple_" + std::to_string(i);
         myObjects.push_back(apple);
         apple->Position = glm::vec3(i * 2.0f, 0.0f, 0);

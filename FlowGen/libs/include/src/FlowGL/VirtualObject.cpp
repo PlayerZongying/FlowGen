@@ -57,7 +57,7 @@ void VirtualObject::Draw(Flow::Camera* aCamera)
     myShader->SetVector3(aCamera->GetPosition(), "viewPos");
 
     glm::vec3 lightPos(0.0f, 15.0f, 5.0f);
-    glm::vec3 lightAmbient(1.0f, 1.0f, 1.0f);
+    glm::vec3 lightAmbient(.0f);
     glm::vec3 lightDiffuse(1.0f, 1.0f, 1.0f);
     glm::vec3 lightSpecular(1.0f, 1.0f, 1.0f);
     
@@ -66,10 +66,10 @@ void VirtualObject::Draw(Flow::Camera* aCamera)
     myShader->SetVector3(lightDiffuse, "light.diffuse");
     myShader->SetVector3(lightSpecular, "light.specular");
 
-    glm::vec3 materialAmbient(1.0f, 0.5f, 0.31f);
-    glm::vec3 materialDiffuse(1.0f, 0.5f, 0.31f);
-    glm::vec3 materialSpecular(0.5f, 0.5f, 0.5f);
-    float shininess = 32.0f;
+    glm::vec3 materialAmbient(1.f);
+    glm::vec3 materialDiffuse(1.f);
+    glm::vec3 materialSpecular(1.f);
+    float shininess = 8.0f;
 
     myShader->SetVector3(materialAmbient, "material.ambient");
     myShader->SetVector3(materialDiffuse, "material.diffuse");

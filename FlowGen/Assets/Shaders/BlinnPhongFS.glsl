@@ -19,8 +19,10 @@ uniform Material material;
 uniform vec4 testColor;
 
 uniform vec3 viewPos;
+uniform sampler2D diffuseTexture;
 
 in vec3 FragPos;
+in vec2 uv;
 in vec3 Normal;
 in vec3 ViewPos;
 
@@ -47,7 +49,8 @@ void main() {
 
     //FragColor = vec4(1); 
     //FragColor = testColor;
-    FragColor = vec4(ambient + diffuse + specular, 1.0);
+    FragColor = vec4(ambient + diffuse + specular, 1.0) * texture(diffuseTexture, uv);
     
+    //FragColor.xy = uv;
     //FragColor = vec4((norm + vec3(1.0f)) * 0.5f, 1.0f);
 }

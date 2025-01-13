@@ -53,6 +53,12 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
     bool has_vt = false;
     bool has_vn = false;
+
+    std::vector<glm::vec3> tempPositions;
+    std::vector<glm::vec2> tempTexCoords;
+    std::vector<glm::vec3> tempNormals;
+
+    std::unordered_map<Vertex, unsigned int, VertexHash> uniqeVertices;
     
     while (std::getline(file, line))
     {
@@ -62,23 +68,26 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
         if (prefix == "v")
         {
-            glm::vec3 vertex;
-            ss >> vertex.x >> vertex.y >> vertex.z;
-            outData.positions.push_back(vertex);
-        }
-        else if (prefix == "vn")
-        {
-            has_vn = true;
-            glm::vec3 normal;
-            ss >> normal.x >> normal.y >> normal.z;
-            outData.normals.push_back(normal);
+            glm::vec3 position;
+            ss >> position.x >> position.y >> position.z;
+            //outData.positions.push_back(position);
+            tempPositions.push_back(position);
         }
         else if (prefix == "vt")
         {
             has_vt = true;
             glm::vec2 texCoord;
             ss >> texCoord.x >> texCoord.y;
-            outData.texCoords.push_back(texCoord);
+            //outData.texCoords.push_back(texCoord);
+            tempTexCoords.push_back(texCoord);
+        }
+        else if (prefix == "vn")
+        {
+            has_vn = true;
+            glm::vec3 normal;
+            ss >> normal.x >> normal.y >> normal.z;
+            //outData.normals.push_back(normal);
+            tempNormals.push_back(normal);
         }
         else if (prefix == "f")
         {
@@ -159,6 +168,21 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 for (int i = 0; i < 3; ++i)
                 {
                     ss >> vIndex[i] >> slash >> tIndex[i] >> slash >> nIndex[i];
+                    Vertex newVert;
+                    newVert.position = tempPositions[vIndex[i] - 1];
+                    newVert.texCoord = tempPositions[tIndex[i] - 1];
+                    newVert.normal = tempPositions[nIndex[i] - 1];
+
+                    if(uniqeVertices.count(newVert) == 0)
+                    {
+                        uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
+                    }
+                    else
+                    {
+                        std::cout<<"repeated!"<<std::endl;
+                    }
+
+                    
                     outData.indices.push_back(vIndex[i] - 1);
                 }
 

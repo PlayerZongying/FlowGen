@@ -9,6 +9,7 @@ uniform mat4 view;        // 视图矩阵
 uniform mat4 projection;  // 投影矩阵
 
 out vec3 FragPos;         // 片段位置（世界空间）
+out vec2 uv;
 out vec3 Normal;          // 片段法线（世界空间）
 out vec3 ViewPos;         // 
 
@@ -30,6 +31,8 @@ void main() {
     Normal = mat3(transpose(inverse(transform))) * aNormal;  // 转换法线到世界空间
     //Normal = aNormal;
     ViewPos = getCameraPositionFromViewMatrix(view);
+    
+    uv = vec2(aTexCoord.x, aTexCoord.y);
 
     gl_Position = projection * view * vec4(FragPos, 1.0);  // 最终顶点位置
     

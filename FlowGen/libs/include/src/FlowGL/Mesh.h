@@ -5,11 +5,29 @@
 class Shader;
 
 struct Vertex
+{
+    glm::vec3 position;
+    glm::vec2 texCoord;
+    glm::vec3 normal;
+
+    bool operator==(const Vertex& other) const
     {
-        glm::vec3 Position;
-        glm::vec3 Normal;
-        glm::vec2 TexCoords;
-    };
+        return position == other.position && texCoord == other.texCoord && normal == other.normal;
+    }
+};
+
+struct VertexHash {
+    std::size_t operator()(const Vertex& vertex) const {
+        return std::hash<float>()(vertex.position.x) ^
+               std::hash<float>()(vertex.position.y) ^
+               std::hash<float>()(vertex.position.z) ^
+               std::hash<float>()(vertex.texCoord.x) ^
+               std::hash<float>()(vertex.texCoord.y) ^
+               std::hash<float>()(vertex.normal.x) ^
+               std::hash<float>()(vertex.normal.y) ^
+               std::hash<float>()(vertex.normal.z);
+    }
+};
 
 
 class Mesh
@@ -31,6 +49,4 @@ private:
 
 protected:
     unsigned int VBO, VAO, EBO;
-
-    
 };
