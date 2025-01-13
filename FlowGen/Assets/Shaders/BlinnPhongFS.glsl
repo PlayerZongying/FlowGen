@@ -50,7 +50,6 @@ void main() {
     //FragColor = vec4(1); 
     //FragColor = testColor;
     FragColor = vec4(ambient + diffuse + specular, 1.0) * texture(diffuseTexture, uv);
-    
-    FragColor.xy = uv;
+    //FragColor.xy = uv;
     //FragColor = vec4((norm + vec3(1.0f)) * 0.5f, 1.0f);
 }

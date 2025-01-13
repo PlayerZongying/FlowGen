@@ -176,20 +176,26 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
                     vertexInOneFace[i] = newVert;
 
-                    if(uniqeVertices.count(newVert) == 0)
-                    {
-                        uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
-                    }
-                    else
-                    {
-                        std::cout<<"repeated!"<<std::endl;
-                    }
+                    // if(uniqeVertices.count(newVert) == 0)
+                    // {
+                    //     uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
+                    // }
+                    // else
+                    // {
+                    //     std::cout<<"repeated!"<<std::endl;
+                    // }
+
+                    // outData.positions.push_back(newVert.position);
+                    // outData.texCoords.push_back(newVert.texCoord);
+                    // outData.normals.push_back(newVert.normal);
+                    //
+                    // outData.indices.push_back(uniqeVertices[newVert]);
 
                     outData.positions.push_back(newVert.position);
                     outData.texCoords.push_back(newVert.texCoord);
                     outData.normals.push_back(newVert.normal);
-                    
-                    outData.indices.push_back(uniqeVertices[newVert]);
+
+                    outData.indices.push_back(outData.indices.size());
                 }
 
                 // in case the face has 4 vertices
@@ -197,7 +203,7 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 ss >> v4 >> slash >> t4 >> slash >> n4;
                 if (!ss.fail())
                 {
-                    // std::cout<<"a quad here"<<std::endl;
+                     std::cout<<"a quad here"<<std::endl;
 
                     outData.indices.push_back(vIndex[0] - 1);
                     outData.indices.push_back(vIndex[2] - 1);

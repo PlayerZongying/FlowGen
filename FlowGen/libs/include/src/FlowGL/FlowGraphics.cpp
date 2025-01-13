@@ -137,7 +137,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     // for (size_t i = 0; i < 1; i++)
     // {
-    //     VirtualObject* sphere = new VirtualObject(SphereMesh, myTexture, BlinnPhong);
+    //     VirtualObject* sphere = new VirtualObject(SwordMesh, myTexture, NormalView);
     //     sphere->ObjectName = "sphere_" + std::to_string(i);
     //     myObjects.push_back(sphere);
     //     sphere->Position = glm::vec3(i * 2.0f, 0.0f, 0);
