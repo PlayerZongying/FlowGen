@@ -176,26 +176,30 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
                     vertexInOneFace[i] = newVert;
 
-                    // if(uniqeVertices.count(newVert) == 0)
-                    // {
-                    //     uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
-                    // }
+                    // clever way
+                    if(uniqeVertices.count(newVert) == 0)
+                    {
+                        outData.positions.push_back(newVert.position);
+                        outData.texCoords.push_back(newVert.texCoord);
+                        outData.normals.push_back(newVert.normal);
+                        uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
+                    }
                     // else
                     // {
-                    //     std::cout<<"repeated!"<<std::endl;
+                    //     // std::cout<<"repeated!"<<std::endl;
                     // }
 
+                    
+                    outData.indices.push_back(uniqeVertices[newVert]);
+
+
+                    // // lazy way
+                    
                     // outData.positions.push_back(newVert.position);
                     // outData.texCoords.push_back(newVert.texCoord);
                     // outData.normals.push_back(newVert.normal);
                     //
-                    // outData.indices.push_back(uniqeVertices[newVert]);
-
-                    outData.positions.push_back(newVert.position);
-                    outData.texCoords.push_back(newVert.texCoord);
-                    outData.normals.push_back(newVert.normal);
-
-                    outData.indices.push_back(outData.indices.size());
+                    // outData.indices.push_back(outData.indices.size());
                 }
 
                 // in case the face has 4 vertices
