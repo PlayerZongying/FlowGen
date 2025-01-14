@@ -135,22 +135,22 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     glEnable(GL_DEPTH_TEST);
     glfwSwapInterval(1);
 
-    // for (size_t i = 0; i < 1; i++)
-    // {
-    //     VirtualObject* sphere = new VirtualObject(SwordMesh, myTexture, NormalView);
-    //     sphere->ObjectName = "sphere_" + std::to_string(i);
-    //     myObjects.push_back(sphere);
-    //     sphere->Position = glm::vec3(i * 2.0f, 0.0f, 0);
-    // }
-
     for (size_t i = 0; i < 1; i++)
     {
-        VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhong);
-        apple->ObjectName = "apple_" + std::to_string(i);
-        myObjects.push_back(apple);
-        apple->Position = glm::vec3(i * 2.0f, 0.0f, 0);
-        apple->Scale = glm::vec3(20);
+        VirtualObject* sphere = new VirtualObject(SwordMesh, myTexture, NormalView);
+        sphere->ObjectName = "sphere_" + std::to_string(i);
+        myObjects.push_back(sphere);
+        sphere->Position = glm::vec3(i * 2.0f, 0.0f, 0);
     }
+
+    // for (size_t i = 0; i < 1; i++)
+    // {
+    //     VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhong);
+    //     apple->ObjectName = "apple_" + std::to_string(i);
+    //     myObjects.push_back(apple);
+    //     apple->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+    //     apple->Scale = glm::vec3(20);
+    // }
 
     // for (size_t i = 0; i < 3; i++)
     // {

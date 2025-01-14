@@ -209,9 +209,22 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 {
                      std::cout<<"a quad here"<<std::endl;
 
-                    outData.indices.push_back(vIndex[0] - 1);
-                    outData.indices.push_back(vIndex[2] - 1);
-                    outData.indices.push_back(v4 - 1);
+                    Vertex newVert;
+                    newVert.position = tempPositions[v4 - 1];
+                    newVert.texCoord = tempTexCoords[t4 - 1];
+                    newVert.normal = tempNormals[n4 - 1];
+
+                    if(uniqeVertices.count(newVert) == 0)
+                    {
+                        outData.positions.push_back(newVert.position);
+                        outData.texCoords.push_back(newVert.texCoord);
+                        outData.normals.push_back(newVert.normal);
+                        uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
+                    }
+
+                    outData.indices.push_back(uniqeVertices[vertexInOneFace[0]]);
+                    outData.indices.push_back(uniqeVertices[vertexInOneFace[2]]);
+                    outData.indices.push_back(uniqeVertices[newVert]);
                 }
             }
         }
