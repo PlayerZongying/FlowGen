@@ -145,11 +145,11 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     for (size_t i = 0; i < 1; i++)
     {
-        VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhong);
+        VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, NormalView);
         apple->ObjectName = "apple_" + std::to_string(i);
         myObjects.push_back(apple);
         apple->Position = glm::vec3(i * 2.0f, 0.0f, 0);
-        apple->Scale = glm::vec3(20);
+        apple->Scale = glm::vec3(50);
     }
 
     // for (size_t i = 0; i < 3; i++)
