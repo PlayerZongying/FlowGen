@@ -57,7 +57,7 @@ void VirtualObject::Draw(Flow::Camera* aCamera)
     myShader->SetVector3(aCamera->GetPosition(), "viewPos");
 
     glm::vec3 lightPos(0.0f, 15.0f, 5.0f);
-    glm::vec3 lightAmbient(.0f);
+    glm::vec3 lightAmbient(0.2f);
     glm::vec3 lightDiffuse(1.0f, 1.0f, 1.0f);
     glm::vec3 lightSpecular(1.0f, 1.0f, 1.0f);
     
