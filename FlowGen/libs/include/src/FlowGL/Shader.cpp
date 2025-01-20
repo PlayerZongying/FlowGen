@@ -153,7 +153,7 @@ void Shader::SetVector3(glm::vec3 aVector3, const std::string& aName)
 
 void Shader::SetVector2(glm::vec2 aVector2, const std::string& aName)
 {
-
+	glUniform2f(glGetUniformLocation(myShaderProgram, aName.c_str()), aVector2.x, aVector2.y);
 }
 
 void Shader::SetFloat(float aFloat, const std::string& aName)
@@ -163,5 +163,5 @@ void Shader::SetFloat(float aFloat, const std::string& aName)
 
 void Shader::SetInt(int aInt, const std::string& aName)
 {
-
+	glUniform1i(glGetUniformLocation(myShaderProgram, aName.c_str()), aInt);
 }

@@ -142,6 +142,8 @@
     <ClCompile Include="libs\include\src\FlowGL\FlowGraphics.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\IWritable.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Level.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Light.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\LightManager.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Mesh.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\ObjLoader.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Shader.cpp" />
@@ -244,6 +246,8 @@
     <ClInclude Include="libs\include\src\FlowGL\FlowGraphics.h" />
     <ClInclude Include="libs\include\src\FlowGL\IWritable.h" />
     <ClInclude Include="libs\include\src\FlowGL\Level.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Light.h" />
+    <ClInclude Include="libs\include\src\FlowGL\LightManager.h" />
     <ClInclude Include="libs\include\src\FlowGL\Mesh.h" />
     <ClInclude Include="libs\include\src\FlowGL\ObjLoader.h" />
     <ClInclude Include="libs\include\src\FlowGL\Shader.h" />
@@ -366,6 +370,8 @@
     <Content Include="Assets\Images\Mona_Lisa.jpg" />
     <Content Include="Assets\Models\Flag.obj" />
     <Content Include="Assets\Shaders\BlinnPhongFS.glsl" />
+    <Content Include="Assets\Shaders\BlinnPhongMultiLightsFS.glsl" />
+    <Content Include="Assets\Shaders\BlinnPhongMultiLightsVS.glsl" />
     <Content Include="Assets\Shaders\BlinnPhongVS.glsl" />
     <Content Include="Assets\Shaders\CoordinateSystemTestFS.glsl" />
     <Content Include="Assets\Shaders\CoordinateSystemTestVS.glsl" />

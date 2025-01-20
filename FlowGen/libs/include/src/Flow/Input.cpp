@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 std::unordered_map<int, bool> myKeyStates;
+bool firstMouse = true;
 float lastX, lastY;
 bool isRightMousePressed = false;
 

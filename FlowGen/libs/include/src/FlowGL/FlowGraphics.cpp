@@ -19,6 +19,7 @@
 #include <fstream>
 #include <sstream>
 
+#include "LightManager.h"
 #include "src/Flow/ResourceHandler.h"
 
 
@@ -28,6 +29,7 @@ Shader* myShader;
 Shader* myBillboard;
 Shader* NormalView;
 Shader* BlinnPhong;
+Shader* BlinnPhongMultiLights;
 
 Square* mySquare;
 Triangle* myTriangle;
@@ -100,7 +102,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     // Blinn Phong Test
     BlinnPhong = new Shader("Assets/Shaders/BlinnPhongVS.glsl", "Assets/Shaders/BlinnPhongFS.glsl");
     NormalView = new Shader("Assets/Shaders/NormalViewVS.glsl", "Assets/Shaders/NormalViewFS.glsl");
-    
+    BlinnPhongMultiLights = new Shader("Assets/Shaders/BlinnPhongMultiLightsVS.glsl", "Assets/Shaders/BlinnPhongMultiLightsFS.glsl");
     
     ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
     ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
@@ -108,7 +110,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
     ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
     ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/apple.obj", "apple");
+    ResourceHandler::Instance().CreateMesh("Assets/Models/appleTest.obj", "apple");
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
 
 
@@ -135,6 +137,53 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     glEnable(GL_DEPTH_TEST);
     glfwSwapInterval(1);
 
+
+    LightManager::Allocate();
+    LightManager* lightManager = LightManager::Instance();
+    
+    // Light* light0 = lightManager->lights[0];
+    // light0->lightType = point;
+    // light0->position = glm::vec3(0,2.5f,0);
+    // light0->ambient =  glm::vec3(0.05f);
+    // light0->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    // light0->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+    //
+    // Light* light1 = lightManager->lights[1];
+    // light1->lightType = point;
+    // light1->position = glm::vec3(0,-15,0);
+    // light1->ambient =  glm::vec3(0.05f);
+    // light1->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    // light1->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+
+    Light* light2 = lightManager->lights[2];
+    light2->lightType = directional;
+    light2->direction = glm::vec3(0,0,1);
+    light2->ambient =  glm::vec3(0.05f);
+    light2->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    light2->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+    
+    Light* light3 = lightManager->lights[3];
+    light3->lightType = directional;
+    light3->direction = glm::vec3(0,0,-1);
+    light3->ambient =  glm::vec3(0.05f);
+    light3->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    light3->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+
+    Light* light4 = lightManager->lights[4];
+    light4->lightType = spot;
+    light4->position = glm::vec3(0,15,0);
+    light4->direction = glm::vec3(0,-1,0);
+    light4->angle = 1;
+    light4->ambient =  glm::vec3(0.15f);
+    light4->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    light4->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+    
+
+    for (Light* light : lightManager->lights)
+    {
+        std::cout<<light->lightType<<std::endl;
+    }
+
     // for (size_t i = 0; i < 1; i++)
     // {
     //     VirtualObject* sphere = new VirtualObject(SwordMesh, myTexture, NormalView);
@@ -145,10 +194,10 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     for (size_t i = 0; i < 2; i++)
     {
-        VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhong);
+        VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhongMultiLights);
         apple->ObjectName = "apple_" + std::to_string(i);
         myObjects.push_back(apple);
-        apple->Position = glm::vec3(0.0f, i * 1.5f, 0);
+        apple->Position = glm::vec3(0.0f, i * 5.0f, 0);
         apple->Scale = glm::vec3(20);
     }
 
