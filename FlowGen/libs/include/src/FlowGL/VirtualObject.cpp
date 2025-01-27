@@ -109,6 +109,24 @@ void VirtualObject::Draw(Flow::Camera* aCamera)
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+void VirtualObject::DrawShadow(Shader* simpleDepthShader)
+{
+    glm::mat4 trans = glm::mat4(1.0f);
+
+    trans = glm::translate(trans, Position);
+
+    trans = glm::rotate(trans, Rotation.x, glm::vec3(1, 0, 0));
+    trans = glm::rotate(trans, Rotation.y, glm::vec3(0, 1, 0));
+    trans = glm::rotate(trans, Rotation.z, glm::vec3(0, 0, 1));
+
+    trans = glm::scale(trans, Scale);
+
+    simpleDepthShader->SetMatrix4(trans, "transform");
+
+    myMesh->Draw(simpleDepthShader);
+    
+}
+
 bool VirtualObject::WriteTo(std::ofstream* outFile)
 {
     outFile->write(reinterpret_cast<const char*>(&Position), sizeof(float) * 3);
@@ -128,4 +146,14 @@ bool VirtualObject::ReadFrom(std::ifstream* inFile)
 Shader* VirtualObject::GetShader()
 {
     return myShader;
+}
+
+Mesh* VirtualObject::GetMesh()
+{
+    return myMesh;
+}
+
+Texture* VirtualObject::GetTexture()
+{
+    return myTexture;
 }

@@ -101,7 +101,7 @@ void main() {
             vec3 diffuse = vec3(0);
             vec3 specular = vec3(0);;
             
-            float spotDotCutoff = dot(-lightDir, light.direction);
+            float spotDotCutoff = dot(-lightDir, normalize(light.direction));
             if(spotDotCutoff >= cos(radians(light.angle)))
             {
                 // diffuse

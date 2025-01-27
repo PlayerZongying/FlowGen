@@ -11,6 +11,7 @@
 #include "ResourceEditor.h"
 #include "CameraEditor.h"
 #include "src/Flow/FlowGen.h"
+#include "src/FlowGL/FlowGraphics.h"
 #include "src/FlowGL/Level.h"
 
 #define itoc(a) ((char*)(intptr_t)(a))
@@ -128,7 +129,7 @@ void Flow::FlowGUI::UpdateHierarchy(std::vector<VirtualObject*> someObjects)
 {
 	if(ImGui::Button("Create Object"))
 	{
-	
+		Flow::CreateVirtualObject();
 	}
 
 	if (someObjects.size() != myObjectEntries.size())

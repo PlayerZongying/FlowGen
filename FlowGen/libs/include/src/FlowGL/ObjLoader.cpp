@@ -101,7 +101,14 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 for (int i = 0; i < 3; ++i)
                 {
                     ss >> vIndex[i];
-                    outData.indices.push_back(vIndex[i] - 1);
+                    Vertex newVert;
+                    newVert.position = tempPositions[vIndex[i] - 1];
+                    
+                    vertexInOneFace[i] = newVert;
+                    
+                    outData.positions.push_back(newVert.position);
+                    
+                    outData.indices.push_back(outData.indices.size());
                 }
 
                 // in case the face has 4 vertices
@@ -111,9 +118,23 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 {
                     // std::cout<<"a quad here"<<std::endl;
 
-                    outData.indices.push_back(vIndex[0] - 1);
-                    outData.indices.push_back(vIndex[2] - 1);
-                    outData.indices.push_back(v4 - 1);
+                    Vertex newVert;
+                    newVert.position = tempPositions[v4 - 1];
+                    
+                    outData.positions.push_back(vertexInOneFace[0].position);
+                    // outData.texCoords.push_back(vertexInOneFace[0].texCoord);
+                    // outData.normals.push_back(vertexInOneFace[0].normal);
+                    outData.indices.push_back(outData.indices.size());
+                    
+                    outData.positions.push_back(vertexInOneFace[2].position);
+                    // outData.texCoords.push_back(vertexInOneFace[2].texCoord);
+                    // outData.normals.push_back(vertexInOneFace[2].normal);
+                    outData.indices.push_back(outData.indices.size());
+                    
+                    outData.positions.push_back(newVert.position);
+                    // outData.texCoords.push_back(newVert.texCoord);
+                    // outData.normals.push_back(newVert.normal);
+                    outData.indices.push_back(outData.indices.size());
                 }
             }
             
@@ -123,7 +144,16 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 for (int i = 0; i < 3; ++i)
                 {
                     ss >> vIndex[i] >> slash >> tIndex[i];
-                    outData.indices.push_back(vIndex[i] - 1);
+                    Vertex newVert;
+                    newVert.position = tempPositions[vIndex[i] - 1];
+                    newVert.texCoord = tempTexCoords[tIndex[i] - 1];
+                    
+                    vertexInOneFace[i] = newVert;
+                    
+                    outData.positions.push_back(newVert.position);
+                    outData.texCoords.push_back(newVert.texCoord);
+                    
+                    outData.indices.push_back(outData.indices.size());
                 }
 
                 // in case the face has 4 vertices
@@ -133,9 +163,24 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 {
                     // std::cout<<"a quad here"<<std::endl;
 
-                    outData.indices.push_back(vIndex[0] - 1);
-                    outData.indices.push_back(vIndex[2] - 1);
-                    outData.indices.push_back(v4 - 1);
+                    Vertex newVert;
+                    newVert.position = tempPositions[v4 - 1];
+                    newVert.texCoord = tempTexCoords[t4 - 1];
+                    
+                    outData.positions.push_back(vertexInOneFace[0].position);
+                    outData.texCoords.push_back(vertexInOneFace[0].texCoord);
+                    // outData.normals.push_back(vertexInOneFace[0].normal);
+                    outData.indices.push_back(outData.indices.size());
+                    
+                    outData.positions.push_back(vertexInOneFace[2].position);
+                    outData.texCoords.push_back(vertexInOneFace[2].texCoord);
+                    // outData.normals.push_back(vertexInOneFace[2].normal);
+                    outData.indices.push_back(outData.indices.size());
+                    
+                    outData.positions.push_back(newVert.position);
+                    outData.texCoords.push_back(newVert.texCoord);
+                    // outData.normals.push_back(newVert.normal);
+                    outData.indices.push_back(outData.indices.size());
                 }
             }
             
@@ -147,7 +192,18 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 for (int i = 0; i < 3; ++i)
                 {
                     ss >> vIndex[i] >> slash >> slash >> nIndex[i];
-                    outData.indices.push_back(vIndex[i] - 1);
+
+                    Vertex newVert;
+                    newVert.position = tempPositions[vIndex[i] - 1];
+                    newVert.normal = tempNormals[nIndex[i] - 1];
+
+                    vertexInOneFace[i] = newVert;
+
+                    outData.positions.push_back(newVert.position);
+                    outData.texCoords.push_back(newVert.texCoord);
+                    outData.normals.push_back(newVert.normal);
+                    
+                    outData.indices.push_back(outData.indices.size());
                 }
 
                 // in case the face has 4 vertices
@@ -157,9 +213,39 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 {
                     // std::cout<<"a quad here"<<std::endl;
 
-                    outData.indices.push_back(vIndex[0] - 1);
-                    outData.indices.push_back(vIndex[2] - 1);
-                    outData.indices.push_back(v4 - 1);
+                    Vertex newVert;
+                    newVert.position = tempPositions[v4 - 1];
+                    newVert.normal = tempNormals[n4 - 1];
+
+                    // // clever way
+                    // if(uniqeVertices.count(newVert) == 0)
+                    // {
+                    //     outData.positions.push_back(newVert.position);
+                    //     outData.texCoords.push_back(newVert.texCoord);
+                    //     outData.normals.push_back(newVert.normal);
+                    //     uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
+                    // }
+                    //
+                    // outData.indices.push_back(uniqeVertices[vertexInOneFace[0]]);
+                    // outData.indices.push_back(uniqeVertices[vertexInOneFace[2]]);
+                    // outData.indices.push_back(uniqeVertices[newVert]);
+
+                    // lazy way
+
+                    outData.positions.push_back(vertexInOneFace[0].position);
+                    // outData.texCoords.push_back(vertexInOneFace[0].texCoord);
+                    outData.normals.push_back(vertexInOneFace[0].normal);
+                    outData.indices.push_back(outData.indices.size());
+
+                    outData.positions.push_back(vertexInOneFace[2].position);
+                    // outData.texCoords.push_back(vertexInOneFace[2].texCoord);
+                    outData.normals.push_back(vertexInOneFace[2].normal);
+                    outData.indices.push_back(outData.indices.size());
+
+                    outData.positions.push_back(newVert.position);
+                    // outData.texCoords.push_back(newVert.texCoord);
+                    outData.normals.push_back(newVert.normal);
+                    outData.indices.push_back(outData.indices.size());
                 }
             }
 
@@ -176,30 +262,30 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
                     vertexInOneFace[i] = newVert;
 
-                    // clever way
-                    if(uniqeVertices.count(newVert) == 0)
-                    {
-                        outData.positions.push_back(newVert.position);
-                        outData.texCoords.push_back(newVert.texCoord);
-                        outData.normals.push_back(newVert.normal);
-                        uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
-                    }
-                    // else
+                    // // clever way
+                    // if(uniqeVertices.count(newVert) == 0)
                     // {
-                    //     // std::cout<<"repeated!"<<std::endl;
+                    //     outData.positions.push_back(newVert.position);
+                    //     outData.texCoords.push_back(newVert.texCoord);
+                    //     outData.normals.push_back(newVert.normal);
+                    //     uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
                     // }
-
-                    
-                    outData.indices.push_back(uniqeVertices[newVert]);
-
-
-                    // // lazy way
-                    
-                    // outData.positions.push_back(newVert.position);
-                    // outData.texCoords.push_back(newVert.texCoord);
-                    // outData.normals.push_back(newVert.normal);
+                    // // else
+                    // // {
+                    // //     // std::cout<<"repeated!"<<std::endl;
+                    // // }
                     //
-                    // outData.indices.push_back(outData.indices.size());
+                    //
+                    // outData.indices.push_back(uniqeVertices[newVert]);
+
+
+                    // lazy way
+                    
+                    outData.positions.push_back(newVert.position);
+                    outData.texCoords.push_back(newVert.texCoord);
+                    outData.normals.push_back(newVert.normal);
+                    
+                    outData.indices.push_back(outData.indices.size());
                 }
 
                 // in case the face has 4 vertices
@@ -214,17 +300,35 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                     newVert.texCoord = tempTexCoords[t4 - 1];
                     newVert.normal = tempNormals[n4 - 1];
 
-                    if(uniqeVertices.count(newVert) == 0)
-                    {
-                        outData.positions.push_back(newVert.position);
-                        outData.texCoords.push_back(newVert.texCoord);
-                        outData.normals.push_back(newVert.normal);
-                        uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
-                    }
+                    // // clever way
+                    // if(uniqeVertices.count(newVert) == 0)
+                    // {
+                    //     outData.positions.push_back(newVert.position);
+                    //     outData.texCoords.push_back(newVert.texCoord);
+                    //     outData.normals.push_back(newVert.normal);
+                    //     uniqeVertices[newVert] = static_cast<unsigned int>(uniqeVertices.size());
+                    // }
+                    //
+                    // outData.indices.push_back(uniqeVertices[vertexInOneFace[0]]);
+                    // outData.indices.push_back(uniqeVertices[vertexInOneFace[2]]);
+                    // outData.indices.push_back(uniqeVertices[newVert]);
 
-                    outData.indices.push_back(uniqeVertices[vertexInOneFace[0]]);
-                    outData.indices.push_back(uniqeVertices[vertexInOneFace[2]]);
-                    outData.indices.push_back(uniqeVertices[newVert]);
+                    // lazy way
+
+                    outData.positions.push_back(vertexInOneFace[0].position);
+                    outData.texCoords.push_back(vertexInOneFace[0].texCoord);
+                    outData.normals.push_back(vertexInOneFace[0].normal);
+                    outData.indices.push_back(outData.indices.size());
+
+                    outData.positions.push_back(vertexInOneFace[2].position);
+                    outData.texCoords.push_back(vertexInOneFace[2].texCoord);
+                    outData.normals.push_back(vertexInOneFace[2].normal);
+                    outData.indices.push_back(outData.indices.size());
+
+                    outData.positions.push_back(newVert.position);
+                    outData.texCoords.push_back(newVert.texCoord);
+                    outData.normals.push_back(newVert.normal);
+                    outData.indices.push_back(outData.indices.size());
                 }
             }
         }

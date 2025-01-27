@@ -93,16 +93,34 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
         return someData;
     }
 
+    ResourceHandler::Instance().CreateTexture("Assets/Images/Default.png", "myTexture");
+    ResourceHandler::Instance().CreateTexture("Assets/Images/Apple.jpg","appleTexture");
+
     myConcreteTexture = new Texture("Assets/Images/Grass.png");
-    myTexture = new Texture("Assets/Images/Default.png");
-    appleTexture = new Texture("Assets/Images/Apple.jpg");
-    myShader = new Shader("Assets/Shaders/VertexShader.glsl", "Assets/Shaders/FragmentShader.glsl");
+    // myTexture = new Texture("Assets/Images/Default.png");
+    // appleTexture = new Texture("Assets/Images/Apple.jpg");
+
+    myTexture = ResourceHandler::Instance().GetTexture("myTexture");
+    appleTexture = ResourceHandler::Instance().GetTexture("appleTexture");
+
+
+    
+    // myShader = new Shader("Assets/Shaders/VertexShader.glsl", "Assets/Shaders/FragmentShader.glsl");
     myBillboard = new Shader("Assets/Shaders/VertexBillboard.glsl", "Assets/Shaders/FragmentShader.glsl");
 
     // Blinn Phong Test
     BlinnPhong = new Shader("Assets/Shaders/BlinnPhongVS.glsl", "Assets/Shaders/BlinnPhongFS.glsl");
-    NormalView = new Shader("Assets/Shaders/NormalViewVS.glsl", "Assets/Shaders/NormalViewFS.glsl");
-    BlinnPhongMultiLights = new Shader("Assets/Shaders/BlinnPhongMultiLightsVS.glsl", "Assets/Shaders/BlinnPhongMultiLightsFS.glsl");
+    // NormalView = new Shader("Assets/Shaders/NormalViewVS.glsl", "Assets/Shaders/NormalViewFS.glsl");
+
+    ResourceHandler::Instance().CreateShader("Assets/Shaders/VertexShader.glsl", "Assets/Shaders/FragmentShader.glsl", "myShader");
+    ResourceHandler::Instance().CreateShader("Assets/Shaders/NormalViewVS.glsl", "Assets/Shaders/NormalViewFS.glsl", "NormalView");
+    ResourceHandler::Instance().CreateShader("Assets/Shaders/BlinnPhongMultiLightsVS.glsl", "Assets/Shaders/BlinnPhongMultiLightsFS.glsl", "BlinnPhongMultiLights");
+
+    myShader = ResourceHandler::Instance().GetShader("myShader");
+    NormalView = ResourceHandler::Instance().GetShader("NormalView");
+    BlinnPhongMultiLights = ResourceHandler::Instance().GetShader("BlinnPhongMultiLights");
+    
+
     
     ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
     ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
@@ -141,13 +159,15 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     LightManager::Allocate();
     LightManager* lightManager = LightManager::Instance();
     
-    // Light* light0 = lightManager->lights[0];
-    // light0->lightType = point;
-    // light0->position = glm::vec3(0,2.5f,0);
-    // light0->ambient =  glm::vec3(0.05f);
-    // light0->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
-    // light0->specular = glm::vec3(1.0f, 1.0f, 1.0f);
-    //
+    Light* light0 = lightManager->lights[0];
+    light0->lightType = spot;
+    light0->position = glm::vec3(8,0.f,0);
+    light0->direction = glm::vec3(-1,0.f,0);
+    light0->angle = 3;
+    light0->ambient =  glm::vec3(0.05f);
+    light0->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    light0->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+    
     // Light* light1 = lightManager->lights[1];
     // light1->lightType = point;
     // light1->position = glm::vec3(0,-15,0);
@@ -155,12 +175,12 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     // light1->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
     // light1->specular = glm::vec3(1.0f, 1.0f, 1.0f);
 
-    Light* light2 = lightManager->lights[2];
-    light2->lightType = directional;
-    light2->direction = glm::vec3(0,0,1);
-    light2->ambient =  glm::vec3(0.05f);
-    light2->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
-    light2->specular = glm::vec3(1.0f, 1.0f, 1.0f);
+    // Light* light2 = lightManager->lights[2];
+    // light2->lightType = directional;
+    // light2->direction = glm::vec3(0,0,1);
+    // light2->ambient =  glm::vec3(0.05f);
+    // light2->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
+    // light2->specular = glm::vec3(1.0f, 1.0f, 1.0f);
     
     Light* light3 = lightManager->lights[3];
     light3->lightType = directional;
@@ -171,9 +191,9 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     Light* light4 = lightManager->lights[4];
     light4->lightType = spot;
-    light4->position = glm::vec3(0,15,0);
-    light4->direction = glm::vec3(0,-1,0);
-    light4->angle = 1;
+    light4->position = glm::vec3(0,8,0);
+    light4->direction = glm::vec3(0,-1,.0f);
+    light4->angle = 3;
     light4->ambient =  glm::vec3(0.15f);
     light4->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
     light4->specular = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -184,22 +204,42 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
         std::cout<<light->lightType<<std::endl;
     }
 
-    // for (size_t i = 0; i < 1; i++)
+    for (size_t i = 0; i < 1; i++)
+    {
+        VirtualObject* sphere = new VirtualObject(SwordMesh, myTexture, NormalView);
+        sphere->ObjectName = "sphere_" + std::to_string(i);
+        myObjects.push_back(sphere);
+        sphere->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+    }
+
+
+    // for (size_t i = 0; i < 2; i++)
     // {
-    //     VirtualObject* sphere = new VirtualObject(SwordMesh, myTexture, NormalView);
-    //     sphere->ObjectName = "sphere_" + std::to_string(i);
-    //     myObjects.push_back(sphere);
-    //     sphere->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+    //     VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhongMultiLights);
+    //     apple->ObjectName = "apple_" + std::to_string(i);
+    //     myObjects.push_back(apple);
+    //     apple->Position = glm::vec3(i * 5.0f,0.0f,0);
+    //     apple->Scale = glm::vec3(20.0f/((i*5+1)));
     // }
 
-    for (size_t i = 0; i < 2; i++)
-    {
-        VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhongMultiLights);
-        apple->ObjectName = "apple_" + std::to_string(i);
-        myObjects.push_back(apple);
-        apple->Position = glm::vec3(0.0f, i * 5.0f, 0);
-        apple->Scale = glm::vec3(20);
-    }
+    // for (size_t i = 0; i < 2; i++)
+    // {
+    //     VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, NormalView);
+    //     apple->ObjectName = "normal_apple_" + std::to_string(i);
+    //     myObjects.push_back(apple);
+    //     apple->Position = glm::vec3(i * 5.0f,3.0f,0);
+    //     apple->Scale = glm::vec3(20.0f/((i*5+1)));
+    // }
+    
+
+    // for (size_t i = 0; i < 2; i++)
+    // {
+    //     VirtualObject* apple = new VirtualObject(AppleMesh, appleTexture, BlinnPhongMultiLights);
+    //     apple->ObjectName = "apple_" + std::to_string(i);
+    //     myObjects.push_back(apple);
+    //     apple->Position = glm::vec3(0.f,i * 5.0f,0);
+    //     apple->Scale = glm::vec3(20.0f);
+    // }
 
     // for (size_t i = 0; i < 3; i++)
     // {
@@ -218,6 +258,8 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     //     teapot->Scale = glm::vec3(.01f, .01f, .01f);
     // }
 
+    // lightManager->CreateDepthTexture();
+
     return someData;
 }
 
@@ -227,6 +269,9 @@ void Flow::BeginRender(Camera* aCamera)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // LightManager::instance->RenderDepthToTextureFromSpotLight(LightManager::instance->lights[0], myObjects);
+
+    
     for (int i = 0; i < myObjects.size(); i++)
     {
         myObjects[i]->Draw(aCamera);
@@ -268,9 +313,15 @@ void Flow::Input(GLFWwindow* aWindow)
     }
 }
 
-void Flow::CreateVirtualObject(Mesh* aMesh, Texture* aTexture, Shader* aShader)
+void Flow::CreateVirtualObject(Mesh* aMesh = CubeMesh, Texture* aTexture = myTexture, Shader* aShader = myShader)
 {
     VirtualObject* newObject = new VirtualObject(aMesh, aTexture, aShader);
+    myObjects.push_back(newObject);
+}
+
+void Flow::CreateVirtualObject()
+{
+    VirtualObject* newObject = new VirtualObject(CubeMesh, myTexture, myShader);
     myObjects.push_back(newObject);
 }
 

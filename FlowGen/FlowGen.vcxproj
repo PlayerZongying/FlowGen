@@ -378,6 +378,8 @@
     <Content Include="Assets\Shaders\fragmentShader.glsl" />
     <Content Include="Assets\Shaders\NormalViewFS.glsl" />
     <Content Include="Assets\Shaders\NormalViewVS.glsl" />
+    <Content Include="Assets\Shaders\ShadowMappingDepthFS.glsl" />
+    <Content Include="Assets\Shaders\ShadowMappingDepthVS.glsl" />
     <Content Include="Assets\Shaders\TextureTestFS.glsl" />
     <Content Include="Assets\Shaders\TextureTestVS.glsl" />
     <Content Include="Assets\Shaders\TransformationTestFS.glsl" />

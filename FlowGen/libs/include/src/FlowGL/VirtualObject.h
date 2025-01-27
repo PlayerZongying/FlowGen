@@ -22,6 +22,7 @@ public:
     void SetShader(Shader& aShader);
 
     void Draw(Flow::Camera* aCamera);
+    void DrawShadow(Shader* simpleDepthShader);
 
     // bool WriteTo(const std::ofstream& outFile) override;
     // bool ReadFrom(const std::ifstream& inFile) override;
@@ -35,6 +36,8 @@ public:
     std::string ObjectName;
 
     Shader* GetShader();
+    Mesh* GetMesh();
+    Texture* GetTexture();
 
 private:
 

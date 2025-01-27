@@ -34,6 +34,10 @@ public:
     Texture*	GetTexture(std::string	aName);
     Mesh*		GetMesh(std::string		aName);
 
+    std::vector<std::string> GetAllMeshes();
+    std::vector<std::string> GetAllTextures();
+    std::vector<std::string> GetAllShaders();
+
     std::vector<std::string> GetAllResources();
 
 private:

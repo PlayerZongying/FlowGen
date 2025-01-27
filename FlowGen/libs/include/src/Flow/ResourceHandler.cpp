@@ -60,6 +60,36 @@ Mesh* ResourceHandler::GetMesh(std::string aName)
     return myMeshes[aName];
 }
 
+std::vector<std::string> ResourceHandler::GetAllMeshes()
+{
+    std::vector<std::string> ReturnVector;
+    for (auto& m : myMeshes)
+    {
+        ReturnVector.push_back(m.first);
+    }
+    return ReturnVector;
+}
+
+std::vector<std::string> ResourceHandler::GetAllTextures()
+{
+    std::vector<std::string> ReturnVector;
+    for (auto& t : myTextures)
+    {
+        ReturnVector.push_back(t.first);
+    }
+    return ReturnVector;
+}
+
+std::vector<std::string> ResourceHandler::GetAllShaders()
+{
+    std::vector<std::string> ReturnVector;
+    for (auto& s : myShaders)
+    {
+        ReturnVector.push_back(s.first);
+    }
+    return ReturnVector;
+}
+
 std::vector<std::string> ResourceHandler::GetAllResources()
 {
     std::vector<std::string> ReturnVector;
