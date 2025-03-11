@@ -10,6 +10,7 @@ namespace Flow
         ObjectEntry();
         ObjectEntry(VirtualObject* anObject);
         ~ObjectEntry();
+        VirtualObject* GetVirtualObject();
 
         void Update();
 
@@ -25,6 +26,7 @@ namespace Flow
         void UpdateMesh();
         void UpdateShader();
         void UpdateTexture();
+        
         
     };
     

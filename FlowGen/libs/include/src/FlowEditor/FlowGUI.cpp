@@ -132,6 +132,19 @@ void Flow::FlowGUI::UpdateHierarchy(std::vector<VirtualObject*> someObjects)
 		Flow::CreateVirtualObject();
 	}
 
+	if(ImGui::Button("Delete Object"))
+	{
+		for(int i = 0; i < myObjectEntries.size(); i++)
+		{
+			if(myObjectEntries[i]->Opened == true)
+			{
+				// delete myObjectEntries[i];
+				Flow::DeleteVirtualObject(someObjects[i]);
+				break;
+			}
+		}
+	}
+
 	if (someObjects.size() != myObjectEntries.size())
 	{
 		RepopulateEntries(someObjects);
@@ -145,20 +158,20 @@ void Flow::FlowGUI::UpdateHierarchy(std::vector<VirtualObject*> someObjects)
 	{
 		std::string number = std::to_string(i);
 		std::string Title = "Object " + number;
-
+	
 		Title = someObjects[i]->ObjectName;
-
+	
 		if (ImGui::Button(Title.c_str()))
 		{
 			myObjectEntries[i]->Opened = !myObjectEntries[i]->Opened;
 			selectedItem = i;
 		}
-
+	
 		if (!myObjectEntries[i]->Opened)
 		{
 			continue;
 		}
-
+	
 		if (selectedItem == i)
 		{
 			myObjectEntries[i]->Update();

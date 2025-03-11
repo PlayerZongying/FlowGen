@@ -148,5 +148,10 @@ void Flow::ObjectEntry::UpdateTexture()
     }
 }
 
+VirtualObject* Flow::ObjectEntry::GetVirtualObject()
+{
+    return myObject;
+}
+
 
 

@@ -28,6 +28,7 @@ namespace Flow
     void CreateVirtualObject(Mesh* aMesh, Texture* aTexture, Shader* aShader);
 
     void CreateVirtualObject();
+    void DeleteVirtualObject(VirtualObject* objectToDelete);
     std::vector<VirtualObject*> GetObjects();
 
     void ClearObjects();

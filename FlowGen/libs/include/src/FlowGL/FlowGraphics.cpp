@@ -322,7 +322,32 @@ void Flow::CreateVirtualObject(Mesh* aMesh = CubeMesh, Texture* aTexture = myTex
 void Flow::CreateVirtualObject()
 {
     VirtualObject* newObject = new VirtualObject(CubeMesh, myTexture, myShader);
+
+    int count = 0;
+    for(int i = 0; i < myObjects.size(); i++)
+    {
+        if(myObjects[i]->ObjectName.find("new object") == 0)
+        {
+            count++;
+        }
+    }
+    newObject->ObjectName = "new object";
+    if(count > 0)
+    {
+        newObject->ObjectName = "new object " + std::to_string(count);
+    }
     myObjects.push_back(newObject);
+}
+
+void Flow::DeleteVirtualObject(VirtualObject* objectToDelete)
+{
+    auto it = std::find(myObjects.begin(), myObjects.end(), objectToDelete);
+    if (it != myObjects.end()) {
+        myObjects.erase(it);
+    }
+
+    // delete objectToDelete;
+    // objectToDelete = nullptr;
 }
 
 std::vector<VirtualObject*> Flow::GetObjects()
