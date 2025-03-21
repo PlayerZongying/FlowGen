@@ -158,7 +158,12 @@ void main() {
             vec3 ambient = light.ambient * material.ambient;
             
             // shadow
-            float shadow = ShadowCalculation(light.position, FragPosLightSpace);
+            float shadow = 0.0f;
+            if(i < 0.5f)
+            {
+                shadow = ShadowCalculation(light.position, FragPosLightSpace);
+            
+            }
 
             FragColor += vec4(ambient + (1.0 - shadow) * (diffuse + specular), 1.0) * texture(diffuseTexture, uv);
         }
