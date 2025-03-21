@@ -21,3 +21,13 @@ void Engine::FlowGen::Update(const float& aDeltaTime)
     myFlyingCamera->Update(myWindow);
     myTime->UpdateDeltaTime(aDeltaTime);
 }
+
+bool Engine::FlowGen::is_simulating() const
+{
+    return isSimulating;
+}
+
+void Engine::FlowGen::ToggleIsSimulating()
+{
+    isSimulating = !isSimulating;
+}

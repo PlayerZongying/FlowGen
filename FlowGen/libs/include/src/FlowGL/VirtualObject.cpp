@@ -16,9 +16,28 @@ VirtualObject::VirtualObject(Mesh* aMesh, Texture* aTexture, Shader* aShader)
     myTexture = aTexture;
     myShader = aShader;
 
+
     Position = glm::vec3(0, 0, 0);
     Rotation = glm::vec3(0, 0, 0);
     Scale = glm::vec3(1, 1, 1);
+
+    collider = new Collider();
+}
+
+VirtualObject::VirtualObject(Mesh* aMesh, Texture* aTexture, Texture* aSpecularMap, Shader* aShader)
+{
+    myMesh = aMesh;
+    myTexture = aTexture;
+    myShader = aShader;
+    mySpecularMap = aSpecularMap;
+
+
+    Position = glm::vec3(0, 0, 0);
+    Rotation = glm::vec3(0, 0, 0);
+    Scale = glm::vec3(1, 1, 1);
+
+    collider = new Collider();
+    
 }
 
 void VirtualObject::SetMesh(Mesh& aMesh)
@@ -31,10 +50,32 @@ void VirtualObject::SetTexture(Texture& aTexture)
     myTexture = &aTexture;
 }
 
+void VirtualObject::SetSpecularMap(Texture& aSpecularMap)
+{
+    mySpecularMap = &aSpecularMap;
+}
+
 void VirtualObject::SetShader(Shader& aShader)
 {
     myShader = &aShader;
 }
+
+void VirtualObject::SetCollider()
+{
+    glm::mat4 trans = glm::mat4(1.0f);
+
+    trans = glm::translate(trans, Position);
+
+    trans = glm::rotate(trans, Rotation.x, glm::vec3(1, 0, 0));
+    trans = glm::rotate(trans, Rotation.y, glm::vec3(0, 1, 0));
+    trans = glm::rotate(trans, Rotation.z, glm::vec3(0, 0, 1));
+
+    trans = glm::scale(trans, Scale);
+
+    collider->transform = trans;
+    collider->position = trans[3];
+}
+
 
 void VirtualObject::Draw(Flow::Camera* aCamera)
 {
@@ -51,12 +92,23 @@ void VirtualObject::Draw(Flow::Camera* aCamera)
     glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
     glBindTexture(GL_TEXTURE_2D, myTexture->TextureObject);
 
+    glActiveTexture(GL_TEXTURE1); // activate the texture unit first before binding texture
+    glBindTexture(GL_TEXTURE_2D, mySpecularMap->TextureObject);
 
+    glActiveTexture(GL_TEXTURE3);
+    glBindTexture(GL_TEXTURE_2D, LightManager::instance->depth_map());
+
+    myShader->Use();
     myShader->SetMatrix4(trans, "transform");
     myShader->SetMatrix4(aCamera->myView, "view");
     myShader->SetMatrix4(aCamera->myProjection, "projection");
 
     myShader->SetVector3(aCamera->GetPosition(), "viewPos");
+    myShader->SetInt(1, "specularMap");
+
+    // shadow
+    myShader->SetInt(3, "shadowMap");
+    myShader->SetMatrix4(LightManager::instance->light_space_matrix(), "lightSpaceMatrix");
 
     // glm::vec3 lightPos(0.0f, 15.0f, 5.0f);
     // glm::vec3 lightAmbient(0.2f);

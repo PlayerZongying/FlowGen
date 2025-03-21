@@ -21,6 +21,8 @@
 
 #include "LightManager.h"
 #include "src/Flow/ResourceHandler.h"
+#include "src/FlowPhysics/BoxCollider.h"
+#include "src/FlowPhysics/SphereCollider.h"
 
 
 GLFWwindow* window;
@@ -36,6 +38,7 @@ Triangle* myTriangle;
 Cube* myCube;
 
 Texture* myTexture;
+Texture* whiteTexture;
 Texture* myConcreteTexture;
 Texture* appleTexture;
 Mesh* CubeMesh;
@@ -95,12 +98,14 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
 
     ResourceHandler::Instance().CreateTexture("Assets/Images/Default.png", "myTexture");
     ResourceHandler::Instance().CreateTexture("Assets/Images/Apple.jpg","appleTexture");
+    ResourceHandler::Instance().CreateTexture("Assets/Images/white.png","whiteTexture");
 
     myConcreteTexture = new Texture("Assets/Images/Grass.png");
     // myTexture = new Texture("Assets/Images/Default.png");
     // appleTexture = new Texture("Assets/Images/Apple.jpg");
 
     myTexture = ResourceHandler::Instance().GetTexture("myTexture");
+    whiteTexture = ResourceHandler::Instance().GetTexture("whiteTexture");
     appleTexture = ResourceHandler::Instance().GetTexture("appleTexture");
 
 
@@ -161,8 +166,8 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     
     Light* light0 = lightManager->lights[0];
     light0->lightType = spot;
-    light0->position = glm::vec3(8,0.f,0);
-    light0->direction = glm::vec3(-1,0.f,0);
+    light0->position = glm::vec3(-5,0.f,0);
+    light0->direction = glm::vec3(1,0.f,0);
     light0->angle = 3;
     light0->ambient =  glm::vec3(0.05f);
     light0->diffuse = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -204,13 +209,49 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
         std::cout<<light->lightType<<std::endl;
     }
 
-    for (size_t i = 0; i < 1; i++)
+
+    // physics test
+    for (size_t i = 0; i < 3; i++)
     {
-        VirtualObject* sphere = new VirtualObject(SwordMesh, myTexture, NormalView);
+        VirtualObject* sphere = new VirtualObject(SphereMesh, myTexture, whiteTexture, myShader);
+        
         sphere->ObjectName = "sphere_" + std::to_string(i);
         myObjects.push_back(sphere);
-        sphere->Position = glm::vec3(i * 2.0f, 0.0f, 0);
+        sphere->Position = glm::vec3(i * 4.0f, 0.0f, 0);
+
+        sphere->collider = new SphereCollider();
+        sphere->SetCollider();
+        sphere->collider->hasGravity = true;
+        sphere->collider->isKinematic = false;
     }
+
+    VirtualObject* sphere = new VirtualObject(SphereMesh, myTexture, whiteTexture,myShader);
+        
+    sphere->ObjectName = "static_sphere";
+    myObjects.push_back(sphere);
+    sphere->Position = glm::vec3(0.0f, -5.0f, 0);
+
+    sphere->collider = new SphereCollider();
+    sphere->SetCollider();
+    sphere->collider->hasGravity = true;
+    sphere->collider->isKinematic = true;
+
+    VirtualObject* box = new VirtualObject(CubeMesh, myTexture, whiteTexture,myShader);
+        
+    box->ObjectName = "static_cube";
+    myObjects.push_back(box);
+    box->Position = glm::vec3(4.0f, -5.0f, 0);
+
+    box->collider = new BoxCollider();
+    BoxCollider* boxCollider = static_cast<BoxCollider*>(box->collider);
+    boxCollider->extents = glm::vec3(.5f);
+    box->SetCollider();
+    box->collider->hasGravity = true;
+    box->collider->isKinematic = true;
+
+
+
+    
 
 
     // for (size_t i = 0; i < 2; i++)
@@ -258,7 +299,7 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     //     teapot->Scale = glm::vec3(.01f, .01f, .01f);
     // }
 
-    // lightManager->CreateDepthTexture();
+    lightManager->CreateDepthTexture();
 
     return someData;
 }
@@ -269,7 +310,7 @@ void Flow::BeginRender(Camera* aCamera)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // LightManager::instance->RenderDepthToTextureFromSpotLight(LightManager::instance->lights[0], myObjects);
+    LightManager::instance->RenderDepthToTextureFromSpotLight(LightManager::instance->lights[0], myObjects);
 
     
     for (int i = 0; i < myObjects.size(); i++)
@@ -313,15 +354,15 @@ void Flow::Input(GLFWwindow* aWindow)
     }
 }
 
-void Flow::CreateVirtualObject(Mesh* aMesh = CubeMesh, Texture* aTexture = myTexture, Shader* aShader = myShader)
+void Flow::CreateVirtualObject(Mesh* aMesh = CubeMesh, Texture* aTexture = myTexture, Texture* aSpecularMap = whiteTexture, Shader* aShader = myShader)
 {
-    VirtualObject* newObject = new VirtualObject(aMesh, aTexture, aShader);
+    VirtualObject* newObject = new VirtualObject(aMesh, aTexture, aSpecularMap, aShader);
     myObjects.push_back(newObject);
 }
 
 void Flow::CreateVirtualObject()
 {
-    VirtualObject* newObject = new VirtualObject(CubeMesh, myTexture, myShader);
+    VirtualObject* newObject = new VirtualObject(CubeMesh, myTexture, whiteTexture, myShader);
 
     int count = 0;
     for(int i = 0; i < myObjects.size(); i++)
@@ -339,8 +380,19 @@ void Flow::CreateVirtualObject()
     myObjects.push_back(newObject);
 }
 
+void Flow::DeleteVirtualObject(std::vector<VirtualObject*>& objects, VirtualObject* objectToDelete)
+{
+    auto it = std::find(objects.begin(), objects.end(), objectToDelete);
+    if (it != objects.end()) {
+        objects.erase(it);
+    }
+    delete objectToDelete;
+    objectToDelete = nullptr;
+}
+
 void Flow::DeleteVirtualObject(VirtualObject* objectToDelete)
 {
+    // std::cout << "Size before erase: " << myObjects.size() << std::endl;
     auto it = std::find(myObjects.begin(), myObjects.end(), objectToDelete);
     if (it != myObjects.end()) {
         myObjects.erase(it);
@@ -348,9 +400,12 @@ void Flow::DeleteVirtualObject(VirtualObject* objectToDelete)
 
     // delete objectToDelete;
     // objectToDelete = nullptr;
+    // std::cout << "Size after erase: " << myObjects.size() << std::endl;
 }
 
 std::vector<VirtualObject*> Flow::GetObjects()
 {
     return myObjects;
 }
+
+

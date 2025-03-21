@@ -22,10 +22,12 @@ namespace Flow
         int selectedMeshIndex = 0;
         int selectedShaderIndex = 0;
         int selectedTextureIndex = 0;
+        int selectedSpecularMapIndex;
 
         void UpdateMesh();
         void UpdateShader();
         void UpdateTexture();
+        void UpdateSpecularMap();
         
         
     };

@@ -25,13 +25,12 @@ namespace Flow
     bool ShouldClose();
     void Input(GLFWwindow* aWindow);
 
-    void CreateVirtualObject(Mesh* aMesh, Texture* aTexture, Shader* aShader);
+    void CreateVirtualObject(Mesh* aMesh, Texture* aTexture, Texture* aSpecularMap, Shader* aShader);
 
     void CreateVirtualObject();
+    void DeleteVirtualObject(std::vector<VirtualObject*>& objects, VirtualObject* objectToDelete);
     void DeleteVirtualObject(VirtualObject* objectToDelete);
     std::vector<VirtualObject*> GetObjects();
 
     void ClearObjects();
-
-
 }

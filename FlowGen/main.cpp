@@ -9,6 +9,8 @@
 #include "src/FlowGL/VirtualObject.h"
 #include <vector>
 
+#include "src/FlowPhysics/FlowPhysics.h"
+
 int main()
 {
     ResourceHandler* resources = new ResourceHandler();
@@ -17,6 +19,7 @@ int main()
     
     // Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, resources);
     Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, engine, resources);
+    FlowPhysics* physics = new FlowPhysics(engine);
 
 
     glfwSetInputMode(RenderData.aWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -35,7 +38,21 @@ int main()
         lastTime = currentTime;
 
         Flow::BeginRender(engine->myCamera);
+
+        if(engine->is_simulating())
+        {
+            physics->simulate(delta);
+        }
+        else
+        {
+            physics->notSimulate();
+        }
+        
+        
         Gui->Render(objects);
+
+        
+        
         Flow::End();
 
         engine->Update(delta);

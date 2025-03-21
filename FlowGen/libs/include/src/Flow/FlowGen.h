@@ -23,12 +23,16 @@ namespace Engine
         void Update(const float& aDeltaTime);
 
         Flow::Camera* myCamera;
+
+        bool is_simulating() const;
+        void ToggleIsSimulating();
+        
     private:
 
         Input* myInput;
         ETime* myTime;
         FlyingCamera* myFlyingCamera;
-
+        bool isSimulating = false;
         GLFWwindow* myWindow;
     };
 }

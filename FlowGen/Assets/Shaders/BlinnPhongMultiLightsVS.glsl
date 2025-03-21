@@ -7,11 +7,13 @@ layout(location = 2) in vec3 aNormal;    // 顶点法线
 uniform mat4 transform;       // 模型矩阵
 uniform mat4 view;        // 视图矩阵
 uniform mat4 projection;  // 投影矩阵
+uniform mat4 lightSpaceMatrix; // lightSpaceMatrix for shadow mapping
 
 out vec3 FragPos;         // 片段位置（世界空间）
 out vec2 uv;
 out vec3 Normal;          // 片段法线（世界空间）
 out vec3 ViewPos;         // 
+out vec4 FragPosLightSpace;
 
 
 
@@ -34,6 +36,7 @@ void main() {
     
     uv = vec2(aTexCoord.x, aTexCoord.y);
 
+    FragPosLightSpace = lightSpaceMatrix * vec4(FragPos, 1.0);
     gl_Position = projection * view * vec4(FragPos, 1.0);  // 最终顶点位置
     
 }

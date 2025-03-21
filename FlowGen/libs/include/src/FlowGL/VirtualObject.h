@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <glm/glm.hpp>
 #include "IWritable.h"
+#include "Texture.h"
+#include "src/FlowPhysics/Collider.h"
 
 class Mesh;
 class Texture;
@@ -16,10 +18,13 @@ class VirtualObject : public IWritable
 public:
 
     VirtualObject(Mesh* aMesh, Texture* aTexture, Shader* aShader);
+    VirtualObject(Mesh* aMesh, Texture* aTexture, Texture* aSpecularMap, Shader* aShader);
 
     void SetMesh(Mesh& aMesh);
     void SetTexture(Texture& aTexture);
+    void SetSpecularMap(Texture& aSpecularMap);
     void SetShader(Shader& aShader);
+    void SetCollider();
 
     void Draw(Flow::Camera* aCamera);
     void DrawShadow(Shader* simpleDepthShader);
@@ -39,10 +44,13 @@ public:
     Mesh* GetMesh();
     Texture* GetTexture();
 
+    Collider* collider;
+
 private:
 
     Mesh* myMesh;
     Texture* myTexture;
+    Texture* mySpecularMap;
     Shader* myShader;
 };
 

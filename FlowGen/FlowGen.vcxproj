@@ -134,6 +134,8 @@
   <ItemGroup>
     <ClCompile Include="libs\include\src\FlowEditor\CameraEditor.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\FlowGUI.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\LightEditor.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\LightEntry.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\ObjectEntry.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\ResourceEditor.cpp" />
     <ClCompile Include="libs\include\src\FlowEditor\ShaderEditor.cpp" />
@@ -152,6 +154,12 @@
     <ClCompile Include="libs\include\src\FlowGL\Texture.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\Triangle.cpp" />
     <ClCompile Include="libs\include\src\FlowGL\VirtualObject.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\BoxCollider.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\Collider.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\Collision.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\FlowPhysics.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\Ray.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\SphereCollider.cpp" />
     <ClCompile Include="libs\include\src\Flow\ETime.cpp" />
     <ClCompile Include="libs\include\src\Flow\FlowGen.cpp" />
     <ClCompile Include="libs\include\src\Flow\MemoryHelper.cpp" />
@@ -238,6 +246,8 @@
     <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="libs\include\src\FlowEditor\CameraEditor.h" />
     <ClInclude Include="libs\include\src\FlowEditor\FlowGUI.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\LightEditor.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\LightEntry.h" />
     <ClInclude Include="libs\include\src\FlowEditor\ObjectEntry.h" />
     <ClInclude Include="libs\include\src\FlowEditor\ResourceEditor.h" />
     <ClInclude Include="libs\include\src\FlowEditor\ShaderEditor.h" />
@@ -256,6 +266,12 @@
     <ClInclude Include="libs\include\src\FlowGL\Texture.h" />
     <ClInclude Include="libs\include\src\FlowGL\Triangle.h" />
     <ClInclude Include="libs\include\src\FlowGL\VirtualObject.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\BoxCollider.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\Collider.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\Collision.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\FlowPhysics.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\Ray.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\SphereCollider.h" />
     <ClInclude Include="libs\include\src\Flow\ETime.h" />
     <ClInclude Include="libs\include\src\Flow\FlowGen.h" />
     <ClInclude Include="libs\include\src\Flow\FlyingCamera.h" />

@@ -33,12 +33,22 @@ private:
     unsigned int depthMapFBO;
     unsigned int depthMap;
 
+public:
+    unsigned depth_map() const;
+
+private:
     glm::mat4 lightProjection, lightView;
     glm::mat4 lightSpaceMatrix;
+
+public:
+    [[nodiscard]] glm::mat4 light_space_matrix() const;
+
+private:
     float near_plane = 1.f, far_plane = 50.f;
 
    
     Shader* simpleDepthShader;
+    Shader* BlinnPhongMultiLights;
 
 
     

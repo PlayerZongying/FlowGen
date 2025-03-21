@@ -25,6 +25,7 @@ LightManager::LightManager()
     }
 
     simpleDepthShader = new Shader("Assets/Shaders/ShadowMappingDepthVS.glsl", "Assets/Shaders/ShadowMappingDepthFS.glsl");
+    BlinnPhongMultiLights = new Shader("Assets/Shaders/BlinnPhongMultiLightsVS.glsl", "Assets/Shaders/BlinnPhongMultiLightsFS.glsl");
 }
 
 // in initialization
@@ -70,7 +71,7 @@ void LightManager::RenderDepthToTextureFromSpotLight(Light* spotLight, std::vect
     
 
     
-    // renderScene(simpleDepthShader);
+    // // renderScene(simpleDepthShader);
     for (int i = 0; i < myObjects.size(); i++)
     {
         myObjects[i]->DrawShadow(simpleDepthShader);
@@ -82,6 +83,16 @@ void LightManager::RenderDepthToTextureFromSpotLight(Light* spotLight, std::vect
     glViewport(0, 0, 1280, 720);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+}
+
+unsigned LightManager::depth_map() const
+{
+    return depthMap;
+}
+
+glm::mat4 LightManager::light_space_matrix() const
+{
+    return lightSpaceMatrix;
 }
 
 

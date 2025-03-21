@@ -78,6 +78,7 @@ void Flow::ObjectEntry::Update()
     UpdateMesh();
     UpdateShader();
     UpdateTexture();
+    UpdateSpecularMap();
     
 
     // -- Move to dedicated shader tool
@@ -91,17 +92,19 @@ void Flow::ObjectEntry::UpdateMesh()
     const std::vector<std::string> meshes = ResourceHandler::Instance().GetAllMeshes();
     int meshesCount = meshes.size();
     std::vector<const char*> meshNames;
+    const char* selectedMesh;
     for(int i = 0; i < meshesCount; i++)
     {
         meshNames.push_back(meshes[i].c_str());
         // if(ResourceHandler::Instance().GetMesh(meshes[selectedMeshIndex]) == myObject->GetMesh()){
         //     selectedMeshIndex = i;
         // }
+
     }
 
     if (ImGui::Combo("Mesh", &selectedMeshIndex, meshNames.data(), meshesCount)) {
         //const char* selectedMesh = meshNames[selectedMeshIndex];
-        const char* selectedMesh = meshNames[selectedMeshIndex];
+        selectedMesh = meshNames[selectedMeshIndex];
         ImGui::Text("Selected Mesh: %s", selectedMesh);
         myObject->SetMesh(*ResourceHandler::Instance().GetMesh(meshes[selectedMeshIndex]));
     }
@@ -145,6 +148,27 @@ void Flow::ObjectEntry::UpdateTexture()
         ImGui::Text("Selected Texure: %s", selectedTexture);
         myObject->SetTexture(*ResourceHandler::Instance().GetTexture(textures[selectedTextureIndex]));
         std::cout<<textures[selectedTextureIndex]<<std::endl;
+    }
+}
+
+void Flow::ObjectEntry::UpdateSpecularMap()
+{
+    const std::vector<std::string> textures = ResourceHandler::Instance().GetAllTextures();
+    int texturesCount = textures.size();
+    std::vector<const char*> textureNames;
+    for(int i = 0; i < texturesCount; i++)
+    {
+        textureNames.push_back(textures[i].c_str());
+        // if(ResourceHandler::Instance().GetShader(shaders[selectedshaderIndex]) == myObject->GetShader()){
+        //     selectedshaderIndex = i;
+        // }
+    }
+    
+    if (ImGui::Combo("Specular Map", &selectedSpecularMapIndex, textureNames.data(), texturesCount)) {
+        const char* selectedTexture = textureNames[selectedSpecularMapIndex];
+        ImGui::Text("Selected Specular Map: %s", selectedTexture);
+        myObject->SetSpecularMap(*ResourceHandler::Instance().GetTexture(textures[selectedSpecularMapIndex]));
+        std::cout<<textures[selectedSpecularMapIndex]<<std::endl;
     }
 }
 
