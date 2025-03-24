@@ -322,6 +322,7 @@ void Flow::BeginRender(Camera* aCamera)
     myBillboard->SetFloat(time, "time");
 
     aCamera->CameraUpdate();
+    //aCamera->CameraUpdate(window);
 }
 
 void Flow::End()

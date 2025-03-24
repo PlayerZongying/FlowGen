@@ -8,9 +8,22 @@
 
 glm::vec3 WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+float Flow::Camera::get_field_of_view() const
+{
+    return fieldOfView;
+}
+
+void Flow::Camera::set_field_of_view(float field_of_view)
+{
+    fieldOfView = field_of_view;
+}
+
 Flow::Camera::Camera(const float& aWidth, const float& aHeight)
 {
-    myProjection = glm::perspective(glm::radians(45.0f), aWidth / aHeight, 0.1f, 100.0f);
+    cameraSize.x = aWidth;
+    cameraSize.y = aHeight;
+
+    myProjection = glm::perspective(glm::radians(fieldOfView), cameraSize.x / cameraSize.y, 0.1f, 100.0f);
     myDirection = glm::vec3(0.0f, 0.0f, -1.0f);
     myPosition = glm::vec3(0.0f, 0.0f, 3.0f);
     myUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -25,10 +38,21 @@ void Flow::Camera::CameraUpdate()
     myView = glm::lookAt(myPosition, myPosition + myDirection, myUp);
 }
 
+void Flow::Camera::CameraUpdate(GLFWwindow* window)
+{
+    int width, height;
+    glfwGetWindowSize(window, &width, &height);
+    cameraSize.x = width;
+    cameraSize.y = height;
+    myProjection = glm::perspective(glm::radians(fieldOfView), cameraSize.x / cameraSize.y, 0.1f, 100.0f);
+    CameraUpdate();
+}
+
 void Flow::Camera::SetPosition(const glm::vec3& aPosition)
 {
     myPosition = aPosition;
 }
+
 
 void Flow::Camera::SetRotation(const glm::vec3& aRotation)
 {
@@ -42,6 +66,10 @@ void Flow::Camera::Move(const glm::vec3& aMove)
     myPosition += WorldUp * aMove.y;
 }
 
+glm::vec3 Flow::Camera::GetDirection()
+{
+    return myDirection;
+}
 void Flow::Camera::SetDirection(const glm::vec3& aDirection)
 {
     myDirection = glm::normalize(aDirection);
@@ -50,4 +78,9 @@ void Flow::Camera::SetDirection(const glm::vec3& aDirection)
 glm::vec3 Flow::Camera::GetPosition()
 {
     return myPosition;
+}
+
+void Flow::Camera::SetProjection()
+{
+    myProjection = glm::perspective(glm::radians(fieldOfView), cameraSize.x / cameraSize.y, 0.1f, 100.0f);
 }
