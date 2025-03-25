@@ -13,6 +13,15 @@ char vPath[256];
 char fPath[256];
 char ResourceName[256];
 
+const char* mipmapFilterNames[] = {
+    "NEAREST",
+    "LINEAR",
+    "NEAREST_MIPMAP_NEAREST",
+    "LINEAR_MIPMAP_NEAREST",
+    "NEAREST_MIPMAP_LINEAR",
+    "LINEAR_MIPMAP_LINEAR"
+};
+
 ResourceEditor::ResourceEditor(ResourceHandler* aHandler)
 {
     myResources = aHandler;
@@ -26,12 +35,34 @@ ResourceEditor::~ResourceEditor()
 
 void ResourceEditor::Update()
 {
-    if (ImGui::BeginMenu("Create a resource"))
-    {
-        if (ImGui::MenuItem("Create Texture", "")) { myCurrentResource = EResource::Texture; }
-        if (ImGui::MenuItem("Create Shader", "")) { myCurrentResource = EResource::Shader; }
-        if (ImGui::MenuItem("Object Mesh", "")) { myCurrentResource = EResource::Mesh; }
-        ImGui::EndMenu();
+    // if (ImGui::BeginMenu("Create a resource"))
+    // {
+    //     if (ImGui::MenuItem("Create Texture", "")) { myCurrentResource = EResource::Texture; }
+    //     if (ImGui::MenuItem("Create Shader", "")) { myCurrentResource = EResource::Shader; }
+    //     if (ImGui::MenuItem("Object Mesh", "")) { myCurrentResource = EResource::Mesh; }
+    //     ImGui::EndMenu();
+    // }
+
+    int minFilterIndex = MipmapFilterToIndex(mipMapMinFilter);
+    if (ImGui::Combo("Min Filter", &minFilterIndex, mipmapFilterNames, IM_ARRAYSIZE(mipmapFilterNames))) {
+        mipMapMinFilter = IndexToMipmapFilter(minFilterIndex);
+
+        for (std::string textureName : myResources->GetAllTextures())
+        {
+            Texture* texture = myResources->GetTexture(textureName);
+            texture->MipMapFilterReset(mipMapMinFilter, mipMapMagFilter);
+        }
+    }
+
+    int magFilterIndex = MipmapFilterToIndex(mipMapMagFilter);
+    if (ImGui::Combo("Mag Filter", &magFilterIndex, mipmapFilterNames, IM_ARRAYSIZE(mipmapFilterNames))) {
+        mipMapMagFilter = IndexToMipmapFilter(magFilterIndex);
+
+        for (std::string textureName : myResources->GetAllTextures())
+        {
+            Texture* texture = myResources->GetTexture(textureName);
+            texture->MipMapFilterReset(mipMapMinFilter, mipMapMagFilter);
+        }
     }
 
     switch (myCurrentResource)
@@ -95,7 +126,13 @@ void ResourceEditor::Update()
         ImGui::Text(allResources[n].c_str(), n);
     }
 
+    
+
     ImGui::EndChild();
+
+    
+
+    
 }
 
 
