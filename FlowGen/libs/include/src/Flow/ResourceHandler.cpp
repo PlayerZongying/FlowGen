@@ -6,6 +6,8 @@
 #include "src/FlowGL/ObjLoader.h"
 #include "ResourceHandler.h"
 
+#include <iostream>
+
 ResourceHandler::ResourceHandler()
 {
     
@@ -36,12 +38,14 @@ void ResourceHandler::CreateTexture(const char* aTexturePath, std::string aName)
 void ResourceHandler::CreateMesh(const char* aModelPath, std::string aName)
 {
     Mesh* newMesh = Flow::LoadObjMesh(aModelPath);
-
+    std::lock_guard<std::mutex> lock(meshMutex);
     myMeshes.emplace(aName, newMesh);
+    std::cout << aName<< " is added into mesh list"<< std::endl;
 }
 
 void ResourceHandler::AddMesh(Mesh* mesh, std::string aName)
 {
+    std::lock_guard<std::mutex> lock(meshMutex);
     myMeshes.emplace(aName, mesh);
 }
 

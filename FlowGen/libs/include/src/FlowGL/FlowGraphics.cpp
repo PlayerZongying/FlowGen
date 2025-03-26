@@ -127,14 +127,28 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     
 
     
-    ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
-    ResourceHandler::Instance().CreateMesh("Assets/Models/appleTest.obj", "apple");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/teapot.obj", "teapot");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/Flag.obj", "Flag");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
+    // ResourceHandler::Instance().CreateMesh("Assets/Models/appleTest.obj", "apple");
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
+
+    std::vector<std::thread> meshLoadingThreads;
+
+    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/plane.obj", "plane");
+    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/monkey.obj", "monkey");
+    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/teapot.obj", "teapot");
+    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/Flag.obj", "Flag");
+    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/sword.obj", "sword");
+    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/sphere.obj", "sphere");
+    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/appleTest.obj", "apple");
+
+    for (auto& t : meshLoadingThreads) {
+        t.join();
+    }
 
 
     FlagMesh = ResourceHandler::Instance().GetMesh("Flag");

@@ -57,6 +57,8 @@ private:
     std::mutex queueMutex;
     std::condition_variable queueCV;
 
+    std::mutex meshMutex;
+
     void ProcessMessages();
     void ProcessMessage(Message* msg);
 
