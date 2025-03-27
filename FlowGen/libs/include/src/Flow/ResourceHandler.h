@@ -31,7 +31,10 @@ public:
     void CreateShader(const char* aVertexPath, const char* aFragmentPath, std::string aName);
     void CreateTexture(const char* aTexturePath, std::string aName);
     void CreateMesh(const char* aModelPath, std::string aName);
+    void CreateMesh(const Flow::ObjData& objData, std::string aName);
+    void CreateMeshesfromObjMap();
     void AddMesh(Mesh* mesh, std::string aName);
+    void AddObj(const char* aObjFilePath, std::string aName);
 
     Shader* GetShader(std::string aName);
     Texture* GetTexture(std::string aName);
@@ -43,6 +46,7 @@ public:
 
     std::vector<std::string> GetAllResources();
 
+    void ProcessMessages();
 private:
     ResourceHandler(const ResourceHandler&) = delete; // 禁止拷贝
     ResourceHandler& operator=(const ResourceHandler&) = delete; // 禁止赋值
@@ -50,6 +54,7 @@ private:
     std::unordered_map<std::string, Texture*> myTextures;
     std::unordered_map<std::string, Shader*> myShaders;
     std::unordered_map<std::string, Mesh*> myMeshes;
+    std::unordered_map<std::string, Flow::ObjData*> myObjsData;
 
 
 
@@ -58,11 +63,14 @@ private:
     std::condition_variable queueCV;
 
     std::mutex meshMutex;
+    std::mutex objMutex;
 
-    void ProcessMessages();
     void ProcessMessage(Message* msg);
+    void AddMessage(Message* aMassage);
 
     std::queue<Message*> messages;
 
     
 };
+
+

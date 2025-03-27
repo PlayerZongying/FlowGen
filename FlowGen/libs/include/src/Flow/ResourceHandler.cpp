@@ -37,16 +37,42 @@ void ResourceHandler::CreateTexture(const char* aTexturePath, std::string aName)
 
 void ResourceHandler::CreateMesh(const char* aModelPath, std::string aName)
 {
+    // std::lock_guard<std::mutex> lock(meshMutex);
     Mesh* newMesh = Flow::LoadObjMesh(aModelPath);
-    std::lock_guard<std::mutex> lock(meshMutex);
     myMeshes.emplace(aName, newMesh);
     std::cout << aName<< " is added into mesh list"<< std::endl;
 }
 
+void ResourceHandler::CreateMesh(const Flow::ObjData& objData, std::string aName)
+{
+    Mesh* newMesh = new Mesh(objData);
+    myMeshes.emplace(aName, newMesh);
+    std::cout << aName<< " is added into mesh list"<< std::endl;
+}
+
+void ResourceHandler::CreateMeshesfromObjMap()
+{
+    for (const auto& pair : myObjsData) {
+        Flow::ObjData objData = *pair.second;
+        std::string name = pair.first;
+        CreateMesh(objData, name);
+    }
+}
+
 void ResourceHandler::AddMesh(Mesh* mesh, std::string aName)
 {
-    std::lock_guard<std::mutex> lock(meshMutex);
+    // std::lock_guard<std::mutex> lock(meshMutex);
     myMeshes.emplace(aName, mesh);
+}
+
+void ResourceHandler::AddObj(const char* aObjFilePath, std::string aName)
+{
+    Flow::ObjData* someData = new Flow::ObjData;
+    if (LoadOBJ(aObjFilePath, *someData))
+    {
+        std::lock_guard<std::mutex> lock(objMutex);
+        myObjsData[aName] = someData;
+    }
 }
 
 Shader* ResourceHandler::GetShader(std::string aName)
@@ -151,9 +177,12 @@ void ResourceHandler::ProcessMessage(Message* msg)
         // Flow::LoadOBJ(msg->msg, outData);
 
         // more message reply
-        Mesh* newMesh = Flow::LoadObjMesh(msg->msg);
-        std::string meshPath = msg->msg;
-        myMeshes[meshPath] = newMesh;
+        // Mesh* newMesh = Flow::LoadObjMesh(msg->msg);
+        // std::string meshPath = msg->msg;
+        // myMeshes[meshPath] = newMesh;
+
+        std::cout<<"Resource Handler: "<< msg->msg<<std::endl;
+        
         break;
 
     }

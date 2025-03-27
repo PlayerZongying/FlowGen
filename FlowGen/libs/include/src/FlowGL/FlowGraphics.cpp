@@ -1,5 +1,6 @@
 ﻿#include "FlowGraphics.h"
 #include "VirtualObject.h"
+#include "ObjLoader.h"
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -23,6 +24,7 @@
 #include "src/Flow/ResourceHandler.h"
 #include "src/FlowPhysics/BoxCollider.h"
 #include "src/FlowPhysics/SphereCollider.h"
+
 
 
 GLFWwindow* window;
@@ -125,7 +127,22 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     NormalView = ResourceHandler::Instance().GetShader("NormalView");
     BlinnPhongMultiLights = ResourceHandler::Instance().GetShader("BlinnPhongMultiLights");
     
+    std::vector<std::thread> meshLoadingThreads;
 
+    meshLoadingThreads.emplace_back(&ResourceHandler::AddObj, &ResourceHandler::Instance(),"Assets/Models/plane.obj", "plane");
+    meshLoadingThreads.emplace_back(&ResourceHandler::AddObj, &ResourceHandler::Instance(),"Assets/Models/monkey.obj", "monkey");
+    meshLoadingThreads.emplace_back(&ResourceHandler::AddObj, &ResourceHandler::Instance(),"Assets/Models/teapot.obj", "teapot");
+    meshLoadingThreads.emplace_back(&ResourceHandler::AddObj, &ResourceHandler::Instance(),"Assets/Models/Flag.obj", "Flag");
+    meshLoadingThreads.emplace_back(&ResourceHandler::AddObj, &ResourceHandler::Instance(),"Assets/Models/sword.obj", "sword");
+    meshLoadingThreads.emplace_back(&ResourceHandler::AddObj, &ResourceHandler::Instance(),"Assets/Models/sphere.obj", "sphere");
+    meshLoadingThreads.emplace_back(&ResourceHandler::AddObj, &ResourceHandler::Instance(),"Assets/Models/appleTest.obj", "apple");
+    
+    for (auto& t : meshLoadingThreads) {
+        t.join();
+    }
+    
+
+    ResourceHandler::Instance().CreateMeshesfromObjMap();
     
     // ResourceHandler::Instance().CreateMesh("Assets/Models/plane.obj", "plane");
     // ResourceHandler::Instance().CreateMesh("Assets/Models/monkey.obj", "monkey");
@@ -134,21 +151,9 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     // ResourceHandler::Instance().CreateMesh("Assets/Models/sword.obj", "sword");
     // ResourceHandler::Instance().CreateMesh("Assets/Models/sphere.obj", "sphere");
     // ResourceHandler::Instance().CreateMesh("Assets/Models/appleTest.obj", "apple");
+    
     ResourceHandler::Instance().AddMesh(new Cube(), "cube");
 
-    std::vector<std::thread> meshLoadingThreads;
-
-    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/plane.obj", "plane");
-    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/monkey.obj", "monkey");
-    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/teapot.obj", "teapot");
-    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/Flag.obj", "Flag");
-    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/sword.obj", "sword");
-    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/sphere.obj", "sphere");
-    meshLoadingThreads.emplace_back(&ResourceHandler::CreateMesh, &ResourceHandler::Instance(),"Assets/Models/appleTest.obj", "apple");
-
-    for (auto& t : meshLoadingThreads) {
-        t.join();
-    }
 
 
     FlagMesh = ResourceHandler::Instance().GetMesh("Flag");
@@ -162,6 +167,8 @@ Flow::FlowInitializeData Flow::Initialize(int aWidth, int aHeight)
     // FlagMesh = LoadObjMesh("Assets/Models/Flag.obj");
 
     // MonkeyMesh = LoadObjMesh("Assets/Models/monkey.obj");
+
+    ResourceHandler::Instance().ProcessMessages();
 
     myCube = new Cube();
     mySquare = new Square();
@@ -331,6 +338,8 @@ void Flow::BeginRender(Camera* aCamera)
     {
         myObjects[i]->Draw(aCamera);
     }
+
+    ResourceHandler::Instance().ProcessMessages();
 
     float time = glfwGetTime();
     myBillboard->SetFloat(time, "time");

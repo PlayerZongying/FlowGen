@@ -20,11 +20,16 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
     std::string binaryFilePath = filePath + ".bin";
 
+    Message* objLoadingMessage = new Message(MessageType::OBJMeshLoading);
+    
+
 
     std::ifstream file(filePath);
     if (!file.is_open())
     {
         std::cerr << "Failed to open OBJ file: " << filePath << std::endl;
+        objLoadingMessage->msg = "Failed to open OBJ file: " + filePath;
+        ResourceHandler::Instance().QueueMessage(objLoadingMessage);
         return false;
     }
 
@@ -41,7 +46,10 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
             start = clock();
             outData = DeserializeObjData(binaryFilePath);
             end = clock();
-            std::cout << "Time used in seconds: " << (double)(end - start)/CLOCKS_PER_SEC << std::endl;
+            std::cout << "Time used in seconds: " << (double)(end - start) / CLOCKS_PER_SEC << std::endl;
+
+            objLoadingMessage->msg = "Loading from binary file:" + binaryFilePath;
+            ResourceHandler::Instance().QueueMessage(objLoadingMessage);
             return true;
         }
     }
@@ -59,7 +67,7 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
     std::vector<glm::vec3> tempNormals;
 
     std::unordered_map<Vertex, unsigned int, VertexHash> uniqeVertices;
-    
+
     while (std::getline(file, line))
     {
         std::istringstream ss(line);
@@ -96,18 +104,18 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
             char slash;
 
             // f v
-            if(!has_vt && !has_vn)
+            if (!has_vt && !has_vn)
             {
                 for (int i = 0; i < 3; ++i)
                 {
                     ss >> vIndex[i];
                     Vertex newVert;
                     newVert.position = tempPositions[vIndex[i] - 1];
-                    
+
                     vertexInOneFace[i] = newVert;
-                    
+
                     outData.positions.push_back(newVert.position);
-                    
+
                     outData.indices.push_back(outData.indices.size());
                 }
 
@@ -120,26 +128,26 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
                     Vertex newVert;
                     newVert.position = tempPositions[v4 - 1];
-                    
+
                     outData.positions.push_back(vertexInOneFace[0].position);
                     // outData.texCoords.push_back(vertexInOneFace[0].texCoord);
                     // outData.normals.push_back(vertexInOneFace[0].normal);
                     outData.indices.push_back(outData.indices.size());
-                    
+
                     outData.positions.push_back(vertexInOneFace[2].position);
                     // outData.texCoords.push_back(vertexInOneFace[2].texCoord);
                     // outData.normals.push_back(vertexInOneFace[2].normal);
                     outData.indices.push_back(outData.indices.size());
-                    
+
                     outData.positions.push_back(newVert.position);
                     // outData.texCoords.push_back(newVert.texCoord);
                     // outData.normals.push_back(newVert.normal);
                     outData.indices.push_back(outData.indices.size());
                 }
             }
-            
+
             // f v/t
-            else if(has_vt && !has_vn) 
+            else if (has_vt && !has_vn)
             {
                 for (int i = 0; i < 3; ++i)
                 {
@@ -147,12 +155,12 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                     Vertex newVert;
                     newVert.position = tempPositions[vIndex[i] - 1];
                     newVert.texCoord = tempTexCoords[tIndex[i] - 1];
-                    
+
                     vertexInOneFace[i] = newVert;
-                    
+
                     outData.positions.push_back(newVert.position);
                     outData.texCoords.push_back(newVert.texCoord);
-                    
+
                     outData.indices.push_back(outData.indices.size());
                 }
 
@@ -166,28 +174,27 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                     Vertex newVert;
                     newVert.position = tempPositions[v4 - 1];
                     newVert.texCoord = tempTexCoords[t4 - 1];
-                    
+
                     outData.positions.push_back(vertexInOneFace[0].position);
                     outData.texCoords.push_back(vertexInOneFace[0].texCoord);
                     // outData.normals.push_back(vertexInOneFace[0].normal);
                     outData.indices.push_back(outData.indices.size());
-                    
+
                     outData.positions.push_back(vertexInOneFace[2].position);
                     outData.texCoords.push_back(vertexInOneFace[2].texCoord);
                     // outData.normals.push_back(vertexInOneFace[2].normal);
                     outData.indices.push_back(outData.indices.size());
-                    
+
                     outData.positions.push_back(newVert.position);
                     outData.texCoords.push_back(newVert.texCoord);
                     // outData.normals.push_back(newVert.normal);
                     outData.indices.push_back(outData.indices.size());
                 }
             }
-            
 
-            
+
             // f v//n
-            else if(!has_vt && has_vn)
+            else if (!has_vt && has_vn)
             {
                 for (int i = 0; i < 3; ++i)
                 {
@@ -202,7 +209,7 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                     outData.positions.push_back(newVert.position);
                     outData.texCoords.push_back(newVert.texCoord);
                     outData.normals.push_back(newVert.normal);
-                    
+
                     outData.indices.push_back(outData.indices.size());
                 }
 
@@ -280,11 +287,11 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
 
 
                     // lazy way
-                    
+
                     outData.positions.push_back(newVert.position);
                     outData.texCoords.push_back(newVert.texCoord);
                     outData.normals.push_back(newVert.normal);
-                    
+
                     outData.indices.push_back(outData.indices.size());
                 }
 
@@ -293,7 +300,7 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
                 ss >> v4 >> slash >> t4 >> slash >> n4;
                 if (!ss.fail())
                 {
-                     std::cout<<"a quad here"<<std::endl;
+                    std::cout << "a quad here" << std::endl;
 
                     Vertex newVert;
                     newVert.position = tempPositions[v4 - 1];
@@ -335,14 +342,26 @@ bool Flow::LoadOBJ(const std::string& filePath, ObjData& outData)
     }
     end = clock();
     std::cout << "Loading from obj file: " << filePath << std::endl;
-    std::cout << "Time used in seconds: " << (double)(end - start)/CLOCKS_PER_SEC << std::endl;
+    std::cout << "Time used in seconds: " << (double)(end - start) / CLOCKS_PER_SEC << std::endl;
+    objLoadingMessage->msg = "Loading from obj file: " + filePath;
+    ResourceHandler::Instance().QueueMessage(objLoadingMessage);
 
     file.close();
 
     SerializeObjData(binaryFilePath, outData);
-    
-    
+
+
     return true;
+}
+
+void Flow::AddOBJ(const std::string& filePath, const std::string& name, std::unordered_map<std::string, ObjData*>& objMap)
+{
+    ObjData someData;
+    if (LoadOBJ(filePath, someData))
+    {
+        std::lock_guard<std::mutex> lock(objLoadingMutex);
+        objMap[name] = &someData;
+    }
 }
 
 Mesh* Flow::LoadObjMesh(const std::string& filename)
