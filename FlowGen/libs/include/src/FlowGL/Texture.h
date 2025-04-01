@@ -16,8 +16,8 @@ enum MipmapFilter {
 class Texture
 {
 public:
-    MipmapFilter textureMipMapMinFilter = LINEAR_MIPMAP_LINEAR;
-    MipmapFilter textureMipMapMagFilter = LINEAR;
+    MipmapFilter textureMipMapMinFilter = NEAREST_MIPMAP_NEAREST;
+    MipmapFilter textureMipMapMagFilter = NEAREST;
 
     Texture(const char* aPath);
 

@@ -18,7 +18,7 @@ int main()
     Engine::FlowGen* engine = new Engine::FlowGen(RenderData.aWindow, RenderData.aCamera);
     
     // Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, resources);
-    Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, engine, resources);
+    Flow::FlowGUI* Gui = new Flow::FlowGUI(RenderData.aWindow, engine, &ResourceHandler::Instance());
     FlowPhysics* physics = new FlowPhysics(engine);
 
 
