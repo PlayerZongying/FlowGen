@@ -18,7 +18,7 @@ The Shader class could load vertex and fragment shaders through the file path to
 
 The created meshes, textures, and shaders will be stored in ResourceHandler for further use instead of instanting again.
 
-4. Virtual Object
+5. Virtual Object
 
 The VirtualObject contains mesh, texture, shader, transform, for rendering, name for display in the UI, and collider for physics simulation.
 
@@ -67,6 +67,12 @@ There is a UI down below to save and load levels, currently only save and load t
 
 Listing all 9 lights and their property, which can also be adjusted.
 
-3. Physics Simulation
+3. Resource Viewer
+
+Selecting the mipmap settings for all the loaded textures.
+
+Listing all 9 lights and their property, which can also be adjusted.
+
+4. Physics Simulation
 
 There is a blue button to toggle physics simulation.
