@@ -5,6 +5,7 @@
 #include "src/Shader/shader_s.h"
 
 #include <iostream>
+
 Mesh::Mesh(const float* someVertices, size_t aVertexSize, unsigned int* someIndices, size_t aIndexSize)
 {
     IndicesSize = 0;
@@ -35,22 +36,22 @@ Mesh::Mesh(const float* someVertices, size_t aVertexSize, unsigned int* someIndi
 
 Mesh::Mesh(Flow::ObjData someData)
 {
-glGenVertexArrays(1, &VAO);
+    glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
 
     std::vector<float> vertexData;
-    for (size_t i = 0; i < someData.vertices.size(); ++i)
+    for (size_t i = 0; i < someData.positions.size(); ++i)
     {
-        vertexData.push_back(someData.vertices[i].x);
-        vertexData.push_back(someData.vertices[i].y);
-        vertexData.push_back(someData.vertices[i].z);
+        vertexData.push_back(someData.positions[i].x);
+        vertexData.push_back(someData.positions[i].y);
+        vertexData.push_back(someData.positions[i].z);
 
         if (i < someData.texCoords.size())
         {
             vertexData.push_back(someData.texCoords[i].x);
             vertexData.push_back(someData.texCoords[i].y);
         }
-        else 
+        else
         {
             vertexData.push_back(0.0f); // Default value
             vertexData.push_back(0.0f); // Default value
@@ -63,7 +64,7 @@ glGenVertexArrays(1, &VAO);
             vertexData.push_back(someData.normals[i].y);
             vertexData.push_back(someData.normals[i].z);
         }
-        else 
+        else
         {
             vertexData.push_back(0.0f); // Default value
             vertexData.push_back(0.0f); // Default value
@@ -75,16 +76,22 @@ glGenVertexArrays(1, &VAO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(float), vertexData.data(), GL_STATIC_DRAW);
 
+    // vertex position
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    // vertex texcoord
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    // vertex normal
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, someData.indices.size() * sizeof(unsigned int), someData.indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, someData.indices.size() * sizeof(unsigned int), someData.indices.data(),
+                 GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 
@@ -93,37 +100,33 @@ glGenVertexArrays(1, &VAO);
 
 Mesh::~Mesh()
 {
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
 }
 
 void Mesh::Draw(Shader* aShader)
 {
-	aShader->use();
-	glBindVertexArray(VAO);
+    aShader->use();
+    glBindVertexArray(VAO);
 
-	if (IndicesSize > 0)
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    if (IndicesSize > 0)
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-		glDrawElements(GL_TRIANGLES, IndicesSize, GL_UNSIGNED_INT, (void*)0);
+        glDrawElements(GL_TRIANGLES, IndicesSize, GL_UNSIGNED_INT, (void*)0);
 
-		glBindVertexArray(0);
-	}
+        glBindVertexArray(0);
+    }
 
-	if (EBO == 0)
-	{
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-	}
-	else
-	{
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-	}
+    if (EBO == 0)
+    {
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+    }
+    else
+    {
+        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    }
 
-	glBindVertexArray(0);
+    glBindVertexArray(0);
 }
-
-
-
-

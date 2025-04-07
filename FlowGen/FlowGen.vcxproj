@@ -106,6 +106,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)libs\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,24 +132,154 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\include\src\FlowEditor\CameraEditor.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\FlowGUI.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\LightEditor.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\LightEntry.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\ObjectEntry.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\ResourceEditor.cpp" />
+    <ClCompile Include="libs\include\src\FlowEditor\ShaderEditor.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Camera.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Cube.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\FlowGraphics.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\IWritable.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Level.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Light.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\LightManager.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Mesh.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\ObjLoader.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Shader.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Square.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\stb_image.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Texture.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\Triangle.cpp" />
+    <ClCompile Include="libs\include\src\FlowGL\VirtualObject.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\BoxCollider.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\Collider.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\Collision.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\FlowPhysics.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\Ray.cpp" />
+    <ClCompile Include="libs\include\src\FlowPhysics\SphereCollider.cpp" />
     <ClCompile Include="libs\include\src\Flow\ETime.cpp" />
     <ClCompile Include="libs\include\src\Flow\FlowGen.cpp" />
+    <ClCompile Include="libs\include\src\Flow\MemoryHelper.cpp" />
+    <ClCompile Include="libs\include\src\Flow\Message\Message.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>x64\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>x64\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFuzzer>false</EnableFuzzer>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>x64\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>x64\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>x64\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>x64\Debug\vc143.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>x64\Debug\FlowGen.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>x64\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>x64\Debug\FlowGen.tlog\</TrackerLogDirectory>
+      <TranslateIncludes>false</TranslateIncludes>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>x64\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <BuildStlModules>false</BuildStlModules>
+      <TreatAngleIncludeAsExternal>false</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>InheritWarningLevel</ExternalWarningLevel>
+      <TreatExternalTemplatesAsInternal>true</TreatExternalTemplatesAsInternal>
+      <DisableAnalyzeExternal>false</DisableAnalyzeExternal>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Github Repository\FlowGen\FlowGen\libs\include;</AdditionalIncludeDirectories>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
+    <ClCompile Include="libs\include\src\Flow\Message\MessageQueue.cpp" />
+    <ClCompile Include="libs\include\src\Flow\ResourceHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="libs\include\imgui\imgui.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_glfw.h" />
     <ClInclude Include="libs\include\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="libs\include\src\Camera.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\CameraEditor.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\FlowGUI.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\LightEditor.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\LightEntry.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\ObjectEntry.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\ResourceEditor.h" />
+    <ClInclude Include="libs\include\src\FlowEditor\ShaderEditor.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Camera.h" />
     <ClInclude Include="libs\include\src\FlowGL\Cube.h" />
+    <ClInclude Include="libs\include\src\FlowGL\FlowGraphics.h" />
+    <ClInclude Include="libs\include\src\FlowGL\IWritable.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Level.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Light.h" />
+    <ClInclude Include="libs\include\src\FlowGL\LightManager.h" />
     <ClInclude Include="libs\include\src\FlowGL\Mesh.h" />
     <ClInclude Include="libs\include\src\FlowGL\ObjLoader.h" />
+    <ClInclude Include="libs\include\src\FlowGL\Shader.h" />
     <ClInclude Include="libs\include\src\FlowGL\Square.h" />
     <ClInclude Include="libs\include\src\FlowGL\stb_image.h" />
     <ClInclude Include="libs\include\src\FlowGL\Texture.h" />
     <ClInclude Include="libs\include\src\FlowGL\Triangle.h" />
+    <ClInclude Include="libs\include\src\FlowGL\VirtualObject.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\BoxCollider.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\Collider.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\Collision.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\FlowPhysics.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\Ray.h" />
+    <ClInclude Include="libs\include\src\FlowPhysics\SphereCollider.h" />
     <ClInclude Include="libs\include\src\Flow\ETime.h" />
     <ClInclude Include="libs\include\src\Flow\FlowGen.h" />
     <ClInclude Include="libs\include\src\Flow\FlyingCamera.h" />
     <ClInclude Include="libs\include\src\Flow\Input.h" />
+    <ClInclude Include="libs\include\src\Flow\MemoryHelper.h" />
+    <ClInclude Include="libs\include\src\Flow\Message\Message.h" />
+    <ClInclude Include="libs\include\src\Flow\Message\MessageQueue.h" />
+    <ClInclude Include="libs\include\src\Flow\ResourceHandler.h" />
     <ClInclude Include="libs\include\src\Tests\CameraTest.h" />
     <ClInclude Include="libs\include\src\Tests\CoordinateSystemTest.h" />
     <ClInclude Include="libs\include\src\Tests\ObjLoaderTest.h" />
@@ -233,13 +364,6 @@
     <ClCompile Include="libs\include\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="libs\include\imgui\imgui_tables.cpp" />
     <ClCompile Include="libs\include\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Cube.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Mesh.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\ObjLoader.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Square.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\stb_image.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Texture.cpp" />
-    <ClCompile Include="libs\include\src\FlowGL\Triangle.cpp" />
     <ClCompile Include="libs\include\src\Flow\FlyingCamera.cpp" />
     <ClCompile Include="libs\include\src\Flow\Input.cpp" />
     <ClCompile Include="libs\src\glad.c" />
@@ -250,24 +374,36 @@
     <ClInclude Include="libs\include\GLFW\glfw3.h" />
     <ClInclude Include="libs\include\GLFW\glfw3native.h" />
     <ClInclude Include="libs\include\KHR\khrplatform.h" />
-    <ClInclude Include="libs\include\src\Renderer.h" />
-    <ClInclude Include="libs\include\src\Shader\shader_s.h" />
     <ClInclude Include="libs\include\src\Tests\ShaderTest.h" />
     <ClInclude Include="libs\include\src\Tests\Tests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\include\src\Tests\ImguiTest.h" />
-    <Content Include="Models\Flag.obj" />
-    <Content Include="Shader\CoordinateSystemTestFS.glsl" />
-    <Content Include="Shader\CoordinateSystemTestVS.glsl" />
-    <Content Include="Shader\fragmentShader.glsl" />
-    <Content Include="Shader\TextureTestFS.glsl" />
-    <Content Include="Shader\TextureTestVS.glsl" />
-    <Content Include="Shader\TransformationTestFS.glsl" />
-    <Content Include="Shader\TransformationTestVS.glsl" />
-    <Content Include="Shader\vertexShader.glsl" />
-    <Content Include="Textures\Girl_with_a_Pearl_Earring.jpg" />
-    <Content Include="Textures\Mona_Lisa.jpg" />
+    <Content Include="Assets\Images\Concrete.png" />
+    <Content Include="Assets\Images\Default.png" />
+    <Content Include="Assets\Images\Girl_with_a_Pearl_Earring.jpg" />
+    <Content Include="Assets\Images\Grass.png" />
+    <Content Include="Assets\Images\Mona_Lisa.jpg" />
+    <Content Include="Assets\Models\Flag.obj" />
+    <Content Include="Assets\Shaders\BlinnPhongFS.glsl" />
+    <Content Include="Assets\Shaders\BlinnPhongMultiLightsFS.glsl" />
+    <Content Include="Assets\Shaders\BlinnPhongMultiLightsVS.glsl" />
+    <Content Include="Assets\Shaders\BlinnPhongVS.glsl" />
+    <Content Include="Assets\Shaders\CoordinateSystemTestFS.glsl" />
+    <Content Include="Assets\Shaders\CoordinateSystemTestVS.glsl" />
+    <Content Include="Assets\Shaders\fragmentShader.glsl" />
+    <Content Include="Assets\Shaders\NormalViewFS.glsl" />
+    <Content Include="Assets\Shaders\NormalViewVS.glsl" />
+    <Content Include="Assets\Shaders\ShadowMappingDepthFS.glsl" />
+    <Content Include="Assets\Shaders\ShadowMappingDepthVS.glsl" />
+    <Content Include="Assets\Shaders\TextureTestFS.glsl" />
+    <Content Include="Assets\Shaders\TextureTestVS.glsl" />
+    <Content Include="Assets\Shaders\TransformationTestFS.glsl" />
+    <Content Include="Assets\Shaders\TransformationTestVS.glsl" />
+    <Content Include="Assets\Shaders\vertexShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Levels\" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
