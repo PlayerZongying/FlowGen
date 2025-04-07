@@ -6,23 +6,23 @@
 
 There is a Mesh Class to store position, uv, and normal information which the ObjLoader can deliver. The ObjLoader supports uv, normal, and trianglization. The ObjLoader can also serialize and deserialize mesh data to reduce loading time,
 
-1. Texture
+2. Texture
 
 The Texture class uses `stb_image.h` to load a jpg or png as a texture.
 
-1. Shader
+3. Shader
 
 The Shader class could load vertex and fragment shaders through the file path to create an OpenGL shader program.
 
- 4. Resource Handler
+4. Resource Handler
 
 The created meshes, textures, and shaders will be stored in ResourceHandler for further use instead of instanting again.
 
-1. Virtual Object
+4. Virtual Object
 
 The VirtualObject contains mesh, texture, shader, transform, for rendering, name for display in the UI, and collider for physics simulation.
 
-1. Light and Light Manager
+6. Light and Light Manager
 
 There are four light types. Every light has attributes such as `LightType`(none, directional, point, and spot),  `position`, `direction`, `intensity`, `length`, `angle`, `ambient`, `diffuse`, and `specular`.
 
@@ -43,13 +43,13 @@ Collider has attributes such as transform, velocity, mass, etc.
 Collider Has child classes BoxCollider and SphereCollider.
 When two colliders collide, collision will be returned, with the two collider pointers and the collision point (position).
 
-1. Ray & RayHit
+2. Ray & RayHit
 
 Ray has attributes such as origin and direction.
 
 When a ray hit a collider, a RayHit will be returned, with the hit collider pointer, hit point (position), and distance.
 
-1. FlowPhysics
+3. FlowPhysics
 
 Has a physics simulate function to run in the main function loop, checking collisions and ray hits, to move the colliders as well as the virtual objects.
 
@@ -63,10 +63,10 @@ There is a button to create a new virtual object (a cube by default), and a butt
 
 There is a UI down below to save and load levels, currently only save and load the transform of the virtual objects.
 
-1. Light viewer
+2. Light viewer
 
 Listing all 9 lights and their property, which can also be adjusted.
 
-1. Physics Simulation
+3. Physics Simulation
 
 There is a blue button to toggle physics simulation.
